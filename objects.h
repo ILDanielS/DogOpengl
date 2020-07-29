@@ -5,4 +5,6 @@ class Objects {
 public:
 	Walls walls;
 	Camera camera;
+
+
 };

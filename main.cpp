@@ -3,7 +3,7 @@
 /*#include "imgui/imgui.h"
 #include "imgui/imgui_impl_freeglut.h"
 #include "imgui/imgui_impl_opengl2.h"*/
-#include <GL\freeglut.h>
+//#include <GL\freeglut.h>
 #include "Objects.h"
 
 using namespace std;
@@ -222,9 +222,9 @@ void display() {
 	gluLookAt(objects.camera.position[0], objects.camera.position[1], objects.camera.position[2],
 		objects.camera.center[0], objects.camera.center[1], objects.camera.center[2], 0, 1, 0);
 	
-	/*
-	GLfloat globalAmbientVec[4] = { gContext.globalAmbient, gContext.globalAmbient, gContext.globalAmbient, 1.0 };
-	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalAmbientVec);*/
+	
+	GLfloat globalAmbientVec[4] = { 0.3f, 0.3f, 1.0f, 1.0 };
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalAmbientVec);
 
 	drawScene();
 	/*
