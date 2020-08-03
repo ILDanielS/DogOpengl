@@ -101,10 +101,10 @@ void keyboard(int key, int, int) {
 	switch (key) {
 	case GLUT_KEY_LEFT:
 		//objects.camera.strafeLeft(step);
-		objects.camera.rotateLeft(10.0);
+		objects.camera.rotateLeft(45.0);
 		break;
 	case GLUT_KEY_RIGHT:
-		objects.camera.rotateRight(10.0);
+		objects.camera.rotateRight(45.0);
 		//objects.camera.strafeRight(step);
 		break;
 	case GLUT_KEY_UP:
@@ -182,9 +182,9 @@ void drawScene() {
 	glTranslated(1.0f, 1.5f, -4.99f);
 	gContext.art.draw();
 	glPopMatrix();*/
+	objects.walls.draw({0,1,2,3});
 	objects.floor.draw();
 
-	objects.walls.draw({0, 1, 2});
 
 }
 
@@ -201,11 +201,11 @@ void display() {
 	ImGuiIO& io = ImGui::GetIO();*/
 
 	//glViewport(0, 0, (GLsizei)io.DisplaySize.x, (GLsizei)io.DisplaySize.y);
-	glViewport(0, 0, 400, 400);
+	glViewport(100, 100, 400*(16 / 9) ,400);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(40.0, 1.0, 1.0, 150.0);
+	gluPerspective(30.0, (16/9), 1.0, 150.0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
@@ -257,7 +257,7 @@ void display() {
 		0, 1, 0);
 	
 	
-	GLfloat globalAmbientVec[4] = { 0.3f, 0.3f, 1.0f, 1.0 };
+	GLfloat globalAmbientVec[4] = { 0.7f, 0.7f, 0.7f, 1.0 };
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalAmbientVec);
 
 	drawScene();

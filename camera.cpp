@@ -2,8 +2,9 @@
 #include <iostream>
 #define PI 3.14159265
 
-Camera::Camera() :position{ -4.0f, 5.0f, 10.0f },
-	center{ -2.3f, 0.0f, 0.0f } {}
+Camera::Camera() :position{ 10.0f, 10.0f, 10.0f },
+center{ 3.0f, 1.0f,0.0f } {}
+
 
 void Camera::setPosition(std::array<GLfloat, 3> pos)
 {
@@ -22,43 +23,57 @@ std::array<GLfloat, 3> Camera::getPosition()
 
 std::array<GLfloat, 3> Camera::getCenter()
 {
-	return std::array<GLfloat, 3>(this->center);
+	std::array<GLfloat, 3> rval;
+	rval[0] = center[0];
+	rval[1] = center[1];
+	rval[2] = center[2];
+
+
+	return std::array<GLfloat, 3>(rval);
 }
 
 void Camera::strafeLeft(float stepSize)
 {
 	this->position[0] -= stepSize;
-	this->center[0] -= stepSize;
+	//this->center[0] -= stepSize;
 }
 
 void Camera::strafeRight(float stepSize)
 {
 	this->position[0] += stepSize;
-	this->center[0] += stepSize;
+	//this->center[0] += stepSize;
 }
 
 void Camera::moveFoward(float stepSize)
 {
 	this->position[2] -= stepSize;
-	this->center[2] -= stepSize;
+	//this->center[2] -= stepSize;
 }
 
 void Camera::moveBack(float stepSize)
 {
 	this->position[2] += stepSize;
-	this->center[2] += stepSize;
+	//this->center[2] += stepSize;
 }
 
 void Camera::rotateLeft(float deg)
 {
-	this->center[0] = this->center[0] * sin(deg*PI/180);
-	this->center[2] = this->center[2] * cos(deg * PI / 180);
+	double sinv, cosv;
+	sinv = sin(deg * PI / 180);
+	cosv = cos(deg * PI / 180);
+	this->center[0] = this->center[0] *cosv + this->center[2] * sinv;
+	this->center[2] = this->center[2] *cosv - this->center[0] * sinv ;
+	std::cout << sinv << " " << cosv << std::endl;
 }
 
 void Camera::rotateRight(float deg)
 {
-	this->center[0] = this->center[0] * cos(deg * PI / 180);
-	this->center[2] = this->center[2] * (-1) * sin(deg * PI / 180);
+	double sinv, cosv;
+	sinv = sin(deg * PI / 180);
+	cosv = cos(deg * PI / 180);
+	this->center[0] = this->center[0] * cosv - this->center[2] * sinv;
+	this->center[2] = this->center[2] * cosv + this->center[0] * sinv;
+	std::cout << sinv << " " << cosv << std::endl;
 }
 
 void Camera::print() {

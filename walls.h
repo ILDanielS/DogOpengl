@@ -7,7 +7,9 @@ public:
 	GLfloat color[4];
 
 	Walls();
-	void draw(std::vector<int> index);
 	~Walls() = default;
+	GLuint wall_texture[1];
+	void drawWall();
+	void draw(std::vector<int> index);
 };
 
