@@ -139,11 +139,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="floor.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="objects.cpp" />
     <ClCompile Include="walls.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h" />
+    <ClInclude Include="floor.h" />
     <ClInclude Include="objects.h" />
     <ClInclude Include="walls.h" />
   </ItemGroup>

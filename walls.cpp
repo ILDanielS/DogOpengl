@@ -2,9 +2,11 @@
 
 Walls::Walls(): color{ 1.0f, 1.0f, 1.0f, -1.0f } {}
 
+
 void Walls::draw(std::vector<int> index) {
-	glPushMatrix();
+
 	for (int i : index) {
+		glPushMatrix();
 		switch (i) {
 		case 0:
 			glRotatef(90, 1, 0, 0);
@@ -40,14 +42,14 @@ void Walls::draw(std::vector<int> index) {
 			for (int z = -5; z < 5; z++) {
 				glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, color);
 				glVertex3d(x, 0, z);
-				glVertex3d(x + 1, 0, z);
-				glVertex3d(x + 1, 0, z + 1);
-				glVertex3d(x, 0, z + 1);
+				glVertex3d(x + 1.0, 0, z);
+				glVertex3d(x + 1.0, 0, z + 1.0);
+				glVertex3d(x, 0, z + 1.0);
 			}
 		}
+		glEnd();
+		glDisable(GL_BLEND);
+		glPopMatrix();
 	}
 
-	glEnd();
-	glDisable(GL_BLEND);
-	glPopMatrix();
 }

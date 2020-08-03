@@ -19,6 +19,10 @@
     <ClCompile Include="camera.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="floor.cpp" />
+    <ClCompile Include="objects.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="objects.h">
@@ -29,6 +33,9 @@
     </ClInclude>
     <ClInclude Include="camera.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="floor.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
