@@ -19,6 +19,15 @@
     <ClCompile Include="camera.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="objects.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="floor.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="objects.h">
@@ -30,5 +39,13 @@
     <ClInclude Include="camera.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="floor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\Desktop\wall.jpg">
+      <Filter>Scene</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -5,11 +5,11 @@
 #include "imgui/imgui_impl_opengl2.h"*/
 //#include <GL\freeglut.h>
 #include "Objects.h"
-
 using namespace std;
 
 //single point of access to all rendered objects
 Objects objects;
+
 
 /*
 //gui interaction handling via imgui
@@ -93,6 +93,34 @@ void guiInteraction()
 	ImGui::End();
 }*/
 
+
+
+void keyboard(int key, int, int) {
+	// Strafing for testing porposes
+	float step = 0.1;
+	switch (key) {
+	case GLUT_KEY_LEFT:
+		//objects.camera.strafeLeft(step);
+		objects.camera.rotateLeft(45.0);
+		break;
+	case GLUT_KEY_RIGHT:
+		objects.camera.rotateRight(45.0);
+		//objects.camera.strafeRight(step);
+		break;
+	case GLUT_KEY_UP:
+		objects.camera.moveFoward(step);
+		break;
+
+	case GLUT_KEY_DOWN:
+		objects.camera.moveBack(step);
+		break;
+	}
+	objects.camera.print();
+	glutPostRedisplay();
+	
+}
+
+
 //keyboard events handling
 /*
 void keyboard(int key, int, int) {
@@ -154,8 +182,10 @@ void drawScene() {
 	glTranslated(1.0f, 1.5f, -4.99f);
 	gContext.art.draw();
 	glPopMatrix();*/
+	objects.walls.draw({0,1,2,3});
+	objects.floor.draw();
 
-	objects.walls.draw({ 0, 1 });
+
 }
 
 //display handling, rendering all objects
@@ -171,11 +201,11 @@ void display() {
 	ImGuiIO& io = ImGui::GetIO();*/
 
 	//glViewport(0, 0, (GLsizei)io.DisplaySize.x, (GLsizei)io.DisplaySize.y);
-	glViewport(0, 0, 400, 400);
+	glViewport(100, 100, 400*(16 / 9) ,400);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(40.0, 1.0, 1.0, 150.0);
+	gluPerspective(30.0, (16/9), 1.0, 150.0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
@@ -219,11 +249,15 @@ void display() {
 	else*/
 	
 	//view mode of camera view setup
-	gluLookAt(objects.camera.position[0], objects.camera.position[1], objects.camera.position[2],
-		objects.camera.center[0], objects.camera.center[1], objects.camera.center[2], 0, 1, 0);
+	std::array<GLfloat, 3> camera_pos = objects.camera.getPosition();
+	std::array<GLfloat, 3> camera_center = objects.camera.getCenter();
+	gluLookAt(
+		camera_pos[0], camera_pos[1], camera_pos[2],
+		camera_center[0], camera_center[1], camera_center[2],
+		0, 1, 0);
 	
 	
-	GLfloat globalAmbientVec[4] = { 0.3f, 0.3f, 1.0f, 1.0 };
+	GLfloat globalAmbientVec[4] = { 0.7f, 0.7f, 0.7f, 1.0 };
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalAmbientVec);
 
 	drawScene();
@@ -296,7 +330,7 @@ int main(int argc, char** argv) {
 	ImGui_ImplFreeGLUT_InstallFuncs();
 	ImGui_ImplOpenGL2_Init();*/
 
-	//glutSpecialFunc(keyboard);
+	glutSpecialFunc(keyboard);
 	glShadeModel(GL_SMOOTH);
 	glEnable(GL_LIGHTING);
 	glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
