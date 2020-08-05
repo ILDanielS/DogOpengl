@@ -1,5 +1,6 @@
 #include <windows.h>
 #include <iostream>
+#include <gl\GL.h>
 /*#include "imgui/imgui.h"
 #include "imgui/imgui_impl_freeglut.h"
 #include "imgui/imgui_impl_opengl2.h"*/
