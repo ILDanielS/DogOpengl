@@ -4,7 +4,8 @@
 class Floor
 {
 public:
-	GLfloat color[4];
+	GLfloat color1[4];
+	GLfloat color2[4];
 	int startx, startz, endx, endz;
 
 	Floor();

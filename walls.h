@@ -8,7 +8,8 @@ public:
 
 	Walls();
 	~Walls() = default;
-	GLuint wall_texture[1];
+	GLuint wall_texture;
+	void loadTextures();
 	void drawWall();
 	void draw(std::vector<int> index);
 };
