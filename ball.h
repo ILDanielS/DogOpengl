@@ -1,0 +1,19 @@
+#pragma once
+#include <GL\freeglut.h>
+#include <array>
+
+class Ball {
+	GLfloat radius;
+	GLuint texture;
+	std::array<GLfloat, 3> position;
+	GLUquadric* quad;
+
+public:
+	Ball(GLfloat radius=1.0f);
+	~Ball() = default;
+
+	std::array<GLfloat, 3> getPosition();
+	void setPosition(std::array<GLfloat, 3> pos);
+
+	void draw();
+};

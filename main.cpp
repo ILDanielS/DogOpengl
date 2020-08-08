@@ -4,7 +4,7 @@
 /*#include "imgui/imgui.h"
 #include "imgui/imgui_impl_freeglut.h"
 #include "imgui/imgui_impl_opengl2.h"*/
-//#include <GL\freeglut.h>
+#include <GL\freeglut.h>
 #include "Objects.h"
 using namespace std;
 
@@ -101,19 +101,22 @@ void keyboard(int key, int, int) {
 	float step = 0.1;
 	switch (key) {
 	case GLUT_KEY_LEFT:
-		//objects.camera.strafeLeft(step);
-		objects.camera.rotateLeft(45.0);
+		objects.camera.setPosition({ 5.0f, 5.0f, 30.0f });
+		objects.camera.setCenter({ 5.0f, 2.5f, 5.0f });
 		break;
 	case GLUT_KEY_RIGHT:
-		objects.camera.rotateRight(45.0);
-		//objects.camera.strafeRight(step);
+		objects.camera.setPosition({ 30.0f, 5.0f, 5.0f });
+		objects.camera.setCenter({ 5.0f, 2.5f, 5.0f });
 		break;
 	case GLUT_KEY_UP:
-		objects.camera.moveFoward(step);
+		objects.camera.setPosition({ 30.0f,30.0f, 30.0f });
+		objects.camera.setCenter({ 0,2.5f,0 });
+		objects.camera.setCenter({ 0,0,0 });
 		break;
 
 	case GLUT_KEY_DOWN:
-		objects.camera.moveBack(step);
+		objects.camera.setPosition({ 30.0f, 5.0f, 30.0f });
+		objects.camera.setCenter({ 0,2.5f,0 });
 		break;
 	}
 	objects.camera.print();
@@ -135,6 +138,13 @@ void keyboard(int key, int, int) {
 }*/
 
 void drawScene() {
+	std::array<GLfloat, 3> pos = objects.ball.getPosition();
+
+	glPushMatrix();
+	glTranslatef(pos[0], pos[1], pos[2]);
+	objects.ball.draw();
+	glPopMatrix();
+
 	/*
 	glPushMatrix();
 	glTranslatef(gContext.pointlight.position[0], gContext.pointlight.position[1], gContext.pointlight.position[2]);
@@ -183,7 +193,7 @@ void drawScene() {
 	glTranslated(1.0f, 1.5f, -4.99f);
 	gContext.art.draw();
 	glPopMatrix();*/
-	objects.walls.draw({0,1,2,3});
+	objects.walls.draw({0,3});
 	objects.floor.draw();
 
 
@@ -202,7 +212,7 @@ void display() {
 	ImGuiIO& io = ImGui::GetIO();*/
 
 	//glViewport(0, 0, (GLsizei)io.DisplaySize.x, (GLsizei)io.DisplaySize.y);
-	glViewport(100, 100, 400*(16 / 9) ,400);
+	glViewport(0, 0, 1000 ,800);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -330,7 +340,7 @@ int main(int argc, char** argv) {
 	ImGui_ImplFreeGLUT_Init();
 	ImGui_ImplFreeGLUT_InstallFuncs();
 	ImGui_ImplOpenGL2_Init();*/
-
+	
 	glutSpecialFunc(keyboard);
 	glShadeModel(GL_SMOOTH);
 	glEnable(GL_LIGHTING);
@@ -346,7 +356,6 @@ int main(int argc, char** argv) {
 
 	// Setup style
 	ImGui::StyleColorsClassic();*/
-
 	glutMainLoop();
 	/*
 	// Cleanup

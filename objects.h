@@ -2,6 +2,7 @@
 #include "walls.h"
 #include "camera.h"
 #include "floor.h"
+#include "ball.h"
 
 
 class Objects {
@@ -11,5 +12,6 @@ public:
 	Walls walls;
 	Floor floor;
 	Camera camera;
+	Ball ball;
 
 };
