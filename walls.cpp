@@ -30,7 +30,7 @@ void Walls::loadTextures() {
 
 void Walls::drawWall() {
 
-	//glEnable(GL_BLEND);
+	glEnable(GL_BLEND);
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 	int height = 10, width = 10;
 	GLfloat ambient[] = { 0.5f, 0.5f, 0.5f },
@@ -38,7 +38,7 @@ void Walls::drawWall() {
 		specular[] = { 1.0f, 1.0f, 1.0f },
 		shininess = 128.0f;
 
-	//glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
 	glMaterialf(GL_FRONT, GL_SHININESS, shininess);
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color);
 	

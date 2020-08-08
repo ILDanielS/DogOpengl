@@ -101,19 +101,22 @@ void keyboard(int key, int, int) {
 	float step = 0.1;
 	switch (key) {
 	case GLUT_KEY_LEFT:
-		//objects.camera.strafeLeft(step);
-		objects.camera.rotateLeft(45.0);
+		objects.camera.setPosition({ 5.0f, 5.0f, 30.0f });
+		objects.camera.setCenter({ 5.0f, 2.5f, 5.0f });
 		break;
 	case GLUT_KEY_RIGHT:
-		objects.camera.rotateRight(45.0);
-		//objects.camera.strafeRight(step);
+		objects.camera.setPosition({ 30.0f, 5.0f, 5.0f });
+		objects.camera.setCenter({ 5.0f, 2.5f, 5.0f });
 		break;
 	case GLUT_KEY_UP:
 		objects.camera.setPosition({ 30.0f,30.0f, 30.0f });
+		objects.camera.setCenter({ 0,2.5f,0 });
+		objects.camera.setCenter({ 0,0,0 });
 		break;
 
 	case GLUT_KEY_DOWN:
-		objects.camera.setPosition({ -30.0f,-30.0f, -30.0f });
+		objects.camera.setPosition({ 30.0f, 5.0f, 30.0f });
+		objects.camera.setCenter({ 0,2.5f,0 });
 		break;
 	}
 	objects.camera.print();
@@ -135,6 +138,13 @@ void keyboard(int key, int, int) {
 }*/
 
 void drawScene() {
+	std::array<GLfloat, 3> pos = objects.ball.getPosition();
+
+	glPushMatrix();
+	glTranslatef(pos[0], pos[1], pos[2]);
+	objects.ball.draw();
+	glPopMatrix();
+
 	/*
 	glPushMatrix();
 	glTranslatef(gContext.pointlight.position[0], gContext.pointlight.position[1], gContext.pointlight.position[2]);
