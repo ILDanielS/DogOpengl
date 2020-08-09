@@ -195,6 +195,7 @@ void drawScene() {
 	glPopMatrix();*/
 	objects.walls.draw({0,3});
 	objects.floor.draw();
+	objects.table.draw();
 
 
 }

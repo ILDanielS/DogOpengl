@@ -3,6 +3,7 @@
 #include "camera.h"
 #include "floor.h"
 #include "ball.h"
+#include "table.h"
 
 
 class Objects {
@@ -13,5 +14,6 @@ public:
 	Floor floor;
 	Camera camera;
 	Ball ball;
+	Table table;
 
 };

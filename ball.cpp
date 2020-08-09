@@ -4,7 +4,6 @@
 Ball::Ball(GLfloat radius) : radius(radius), texture(0), position({ 5, radius, 5 }), quad(gluNewQuadric()){}
 
 void Ball::draw() {
-	//glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 
 	GLfloat ambient[] = { 0.5f, 0.5f, 0.5f },
