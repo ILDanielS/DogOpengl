@@ -3,12 +3,8 @@
 #include "camera.h"
 #include "floor.h"
 #include "ball.h"
-//#include "Dog/Dog.h"
-//#include "Dog/Body.h"
-//#include "Dog/Head.h"
-//#include "Dog/Legs.h"
-//#include "Dog/Tail.h"
-#include "Dogg.h"
+#include "Dog/Dog.h"
+//#include "dogg.h"
 
 class Objects {
 public:
@@ -17,6 +13,6 @@ public:
 	Floor floor;
 	Camera camera;
 	Ball ball;
-	Dogg dog;
+	Dog dog;
 	~Objects() = default;
 };

@@ -5,7 +5,7 @@
 #include "imgui/imgui_impl_freeglut.h"
 #include "imgui/imgui_impl_opengl2.h"*/
 #include <GL\freeglut.h>
-#include "Objects.h"
+#include "objects.h"
 using namespace std;
 
 //single point of access to all rendered objects
@@ -145,8 +145,8 @@ void drawScene() {
 	glPopMatrix();
 
 	glPushMatrix();
-	glMultMatrixf(objects.dog.local);
-	objects.dog.draw();
+	//glMultMatrixf(objects.dog.local);
+	//objects.dog.draw();
 	glPopMatrix();
 
 	
