@@ -1,13 +1,13 @@
 #include <Dog.h>
 #include <Body.h>
 #include <Head.h>
-#include <Leg.h>
+#include <Legs.h>
 #include <Tail.h>
 #include <gl\freeglut.h>
 
 Head::Head() : horizontalAngle(0.0f),
- 			   verticalAngle(10.f),
-			   isMoving(false);
+verticalAngle(10.f),
+isMoving(false) {};
 
 void Head::draw() {
 	glPushMatrix();

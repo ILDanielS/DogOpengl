@@ -11,7 +11,6 @@ using namespace std;
 //single point of access to all rendered objects
 Objects objects;
 
-
 /*
 //gui interaction handling via imgui
 void guiInteraction()
@@ -145,6 +144,12 @@ void drawScene() {
 	objects.ball.draw();
 	glPopMatrix();
 
+	glPushMatrix();
+	glMultMatrixf(objects.dog.local);
+	objects.dog.draw();
+	glPopMatrix();
+
+	
 	/*
 	glPushMatrix();
 	glTranslatef(gContext.pointlight.position[0], gContext.pointlight.position[1], gContext.pointlight.position[2]);

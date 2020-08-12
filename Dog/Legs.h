@@ -4,7 +4,7 @@
 
 class Legs {
 public:
-	Legs();
+	Legs() = default;
 	bool isMoving;
 	void draw();
 	void movement();

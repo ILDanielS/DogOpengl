@@ -1,17 +1,17 @@
 #pragma once
 #include <GL/freeglut.h>
 #include <functional>
-#include <Body.h>
-#include <Head.h>
-#include <Legs.h>
-#include <Tail.h>
+#include "Body.h"
+#include "Head.h"
+#include "Legs.h"
+#include "Tail.h"
 
 /*
 	The Dog object - render all dog's parts
 */
 class Dog {
 public:
-	Dog();
+	Dog() = default;
 	GLfloat local[16];
 	Body body;
 	Legs legs;

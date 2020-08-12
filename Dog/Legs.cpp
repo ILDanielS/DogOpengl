@@ -1,13 +1,13 @@
 #include <Dog.h>
 #include <Body.h>
 #include <Head.h>
-#include <Leg.h>
+#include <Legs.h>
 #include <Tail.h>
 #include <gl\freeglut.h>
 
 Legs::Legs() :isMoving(false),
-			  angle(0.0f),
-			  isMovingStraight(true);
+angle(0.0f),
+isMovingStraight(true) {};
 
 void Legs::draw() {
 	glPushMatrix();

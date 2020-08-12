@@ -1,18 +1,14 @@
 #include <Dog.h>
 #include <Body.h>
 #include <Head.h>
-#include <Leg.h>
+#include <Legs.h>
 #include <Tail.h>
 #include <gl\freeglut.h>
 
-Dog::Dog() :body(),
-			legs(),
-			head(),
-			tail(),
-			nextMove(nullptr)
-			isMoving(false);
+Dog::Dog(): nextMove(nullptr),
+isMoving(false) {};
 
-void Dog::init() {
+void Dog::initialize() {
 	GLfloat viewModelMatrix[16];
 	glGetFloatv(GL_MODELVIEW_MATRIX, viewModelMatrix);
 	glLoadIdentity();
@@ -25,7 +21,7 @@ void Dog::init() {
 }
 
 void Dog::draw() {
-	dogInMovement();
+	this->dogInMovement();
 
 	glPushMatrix();
 	

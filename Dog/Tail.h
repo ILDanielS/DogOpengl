@@ -4,11 +4,10 @@
 
 class Tail {
 public:
-	Tail();
+	Tail() = default;
 	bool isMoving;
 	GLfloat horizontalAngle;
 	GLfloat verticalAngle;
-	bool isMoving;
 	void draw();
 	void movement();
 	~Tail() = default;

@@ -1,16 +1,16 @@
 #include <Dog.h>
 #include <Body.h>
 #include <Head.h>
-#include <Leg.h>
+#include <Legs.h>
 #include <Tail.h>
 #include <gl\freeglut.h>
 
 Tail::Tail() :isMoving(false),
-			  horizontalAngle(0.0f)
-			  verticalAngle(-10.0f),
-			  isMoving(false),
-			  wiggleAngle(0.0f),
-			  isMovingLeft(true);
+horizontalAngle(0.0f)
+verticalAngle(-10.0f),
+isMoving(false),
+wiggleAngle(0.0f),
+isMovingLeft(true) {};
 
 void Tail::draw() {
 	glPushMatrix();
