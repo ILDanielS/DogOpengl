@@ -11,7 +11,7 @@
 */
 class Dog {
 public:
-	Dog() = default;
+	Dog();
 	GLfloat local[16];
 	Body body;
 	Legs legs;

@@ -1,8 +1,4 @@
-#include <Dog.h>
-#include <Body.h>
-#include <Head.h>
-#include <Legs.h>
-#include <Tail.h>
+#include "Body.h"
 #include <gl\freeglut.h>
 
 void Body::draw() {

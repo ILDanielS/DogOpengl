@@ -1,8 +1,4 @@
-#include <Dog.h>
-#include <Body.h>
-#include <Head.h>
-#include <Legs.h>
-#include <Tail.h>
+#include "Head.h"
 #include <gl\freeglut.h>
 
 Head::Head() : horizontalAngle(0.0f),

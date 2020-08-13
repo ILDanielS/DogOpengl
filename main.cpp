@@ -145,8 +145,8 @@ void drawScene() {
 	glPopMatrix();
 
 	glPushMatrix();
-	//glMultMatrixf(objects.dog.local);
-	//objects.dog.draw();
+	glMultMatrixf(objects.dog.local);
+	objects.dog.draw();
 	glPopMatrix();
 
 	

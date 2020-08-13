@@ -4,7 +4,7 @@
 
 class Head {
 public:
-	Head() = default;
+	Head();
 	GLfloat horizontalAngle;
 	GLfloat verticalAngle;
 	bool isMoving;

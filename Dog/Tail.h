@@ -4,7 +4,7 @@
 
 class Tail {
 public:
-	Tail() = default;
+	Tail();
 	bool isMoving;
 	GLfloat horizontalAngle;
 	GLfloat verticalAngle;

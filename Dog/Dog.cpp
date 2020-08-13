@@ -1,8 +1,4 @@
-#include <Dog.h>
-#include <Body.h>
-#include <Head.h>
-#include <Legs.h>
-#include <Tail.h>
+#include "Dog.h"
 #include <gl\freeglut.h>
 
 Dog::Dog(): nextMove(nullptr),
