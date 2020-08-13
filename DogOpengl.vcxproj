@@ -141,6 +141,7 @@
     <ClCompile Include="ball.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="floor.cpp" />
+    <ClCompile Include="lamp.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="objects.cpp" />
     <ClCompile Include="spotlight.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="ball.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="floor.h" />
+    <ClInclude Include="lamp.h" />
     <ClInclude Include="spotlight.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="objects.h" />

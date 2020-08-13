@@ -138,11 +138,18 @@ void keyboard(int key, int, int) {
 }*/
 
 void drawScene() {
-	std::array<GLfloat, 3> pos = objects.ball.getPosition();
+	std::array<GLfloat, 3> pos = objects.lamp.getPosition();
 
 	glPushMatrix();
 	glTranslatef(pos[0], pos[1], pos[2]);
-	objects.ball.draw();
+	objects.lamp.draw();
+	glPopMatrix();
+
+	pos = objects.spotlight.getPosition();
+	glEnable(GL_LIGHT0);
+	glPushMatrix();
+	glTranslatef(pos[0], pos[1], pos[2]);
+	objects.spotlight.draw();
 	glPopMatrix();
 
 	/*
@@ -269,7 +276,7 @@ void display() {
 		0, 1, 0);
 	
 	
-	GLfloat globalAmbientVec[4] = { 0.7f, 0.7f, 0.7f, 1.0 };
+	GLfloat globalAmbientVec[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalAmbientVec);
 
 	drawScene();

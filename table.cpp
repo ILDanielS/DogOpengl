@@ -8,12 +8,14 @@ Table::Table(std::array<GLfloat, 3>pos,
 
 void Table::draw() {
 
-	GLfloat ambient[] = { 0.5f, 0.5f, 0.5f },
-		diffuse[] = { 0.9f, 0.9f, 0.9f },
-		specular[] = { 1.0f, 1.0f, 1.0f },
-		shininess = 0.0f,
-		color[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+	GLfloat ambient[] = { 0.0f, 0.0f, 0.0f },
+		diffuse[] = { 0.0f, 0.0f, 0.0f },
+		specular[] = { 0.0f, 0.0f, 0.0f },
+		shininess = 80.0f,
+		color[] = { 0.1f, 0.1f, 0.1f, 0.1f };
 
+
+	glColor3fv(color);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specular);
 	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);

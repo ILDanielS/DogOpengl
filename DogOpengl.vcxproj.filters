@@ -34,6 +34,7 @@
     <ClCompile Include="ball.cpp" />
     <ClCompile Include="table.cpp" />
     <ClCompile Include="spotlight.cpp" />
+    <ClCompile Include="lamp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="objects.h">
@@ -58,6 +59,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="spotlight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lamp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
