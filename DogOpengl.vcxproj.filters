@@ -33,6 +33,7 @@
     </ClCompile>
     <ClCompile Include="ball.cpp" />
     <ClCompile Include="table.cpp" />
+    <ClCompile Include="spotlight.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="objects.h">
@@ -54,6 +55,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="table.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="spotlight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
