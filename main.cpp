@@ -95,46 +95,61 @@ void guiInteraction()
 
 
 
-void keyboard(int key, int, int) {
-	// Strafing for testing porposes
-	float step = 0.1;
-	switch (key) {
-	case GLUT_KEY_LEFT:
-		objects.camera.setPosition({ 5.0f, 5.0f, 30.0f });
-		objects.camera.setCenter({ 5.0f, 2.5f, 5.0f });
-		break;
-	case GLUT_KEY_RIGHT:
-		objects.camera.setPosition({ 30.0f, 5.0f, 5.0f });
-		objects.camera.setCenter({ 5.0f, 2.5f, 5.0f });
-		break;
-	case GLUT_KEY_UP:
-		objects.camera.setPosition({ 30.0f,30.0f, 30.0f });
-		objects.camera.setCenter({ 0,2.5f,0 });
-		objects.camera.setCenter({ 0,0,0 });
-		break;
-
-	case GLUT_KEY_DOWN:
-		objects.camera.setPosition({ 30.0f, 5.0f, 30.0f });
-		objects.camera.setCenter({ 0,2.5f,0 });
-		break;
-	}
-	objects.camera.print();
-	glutPostRedisplay();
-	
-}
-
+//void keyboard(int key, int, int) {
+//	// Strafing for testing porposes
+//	float step = 0.1;
+//	switch (key) {
+//	case GLUT_KEY_LEFT:
+//		objects.camera.setPosition({ 5.0f, 5.0f, 30.0f });
+//		objects.camera.setCenter({ 5.0f, 2.5f, 5.0f });
+//		break;
+//	case GLUT_KEY_RIGHT:
+//		objects.camera.setPosition({ 30.0f, 5.0f, 5.0f });
+//		objects.camera.setCenter({ 5.0f, 2.5f, 5.0f });
+//		break;
+//	case GLUT_KEY_UP:
+//		objects.camera.setPosition({ 30.0f,30.0f, 30.0f });
+//		objects.camera.setCenter({ 0,2.5f,0 });
+//		objects.camera.setCenter({ 0,0,0 });
+//		break;
+//
+//	case GLUT_KEY_DOWN:
+//		objects.camera.setPosition({ 30.0f, 5.0f, 30.0f });
+//		objects.camera.setCenter({ 0,2.5f,0 });
+//		break;
+//	}
+//	objects.camera.print();
+//	glutPostRedisplay();
+//	
+//}
 
 //keyboard events handling
-/*
 void keyboard(int key, int, int) {
 	switch (key) {
-	case GLUT_KEY_LEFT:  objects.dog.nextMove = []() { glRotatef(7, 0, 1, 0); };   break;
-	case GLUT_KEY_RIGHT: objects.dog.nextMove = []() { glRotatef(-7, 0, 1, 0); };  break;
-	case GLUT_KEY_UP:	 objects.dog.nextMove = []() { glTranslated(0, 0, 0.2); }; break;
-	case GLUT_KEY_DOWN:  objects.dog.nextMove = []() { glTranslated(0, 0, -0.2); }; break;
+		case GLUT_KEY_LEFT:  
+			objects.dog.nextMove = []() { 
+				glRotatef(15, 0, 1, 0); 
+			};
+			break;
+		case GLUT_KEY_RIGHT:
+			objects.dog.nextMove = []() { 
+				glRotatef(-15, 0, 1, 0); 
+			};
+			break;
+		case GLUT_KEY_UP:
+			objects.dog.nextMove = []() {
+				glTranslated(0, 0, 1); 
+			};
+			break;
+		case GLUT_KEY_DOWN:
+			objects.dog.nextMove = []() { 
+				glTranslated(0, 0, -1); 
+			};
+			break;
 	}
+	
 	glutPostRedisplay();
-}*/
+}
 
 void drawScene() {
 	std::array<GLfloat, 3> pos = objects.ball.getPosition();
@@ -145,10 +160,9 @@ void drawScene() {
 	glPopMatrix();
 
 	glPushMatrix();
-	glMultMatrixf(objects.dog.local);
+	glTranslatef(5, 1.1, 3);
 	objects.dog.draw();
 	glPopMatrix();
-
 	
 	/*
 	glPushMatrix();
@@ -200,8 +214,6 @@ void drawScene() {
 	glPopMatrix();*/
 	objects.walls.draw({0,3});
 	objects.floor.draw();
-
-
 }
 
 //display handling, rendering all objects
@@ -224,19 +236,17 @@ void display() {
 	gluPerspective(30.0, (16/9), 1.0, 150.0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-
-	/*
+		
 	//update the dog's transformation matrix
-	if (gContext.dog.nextMove) {
-		gContext.dog.isMoving = true;
+	if (objects.dog.nextMove) {
+		objects.dog.setMoving(true);
 		GLfloat viewModelMatrix[16];
 		glGetFloatv(GL_MODELVIEW_MATRIX, viewModelMatrix);
-		glLoadMatrixf(gContext.dog.local);
-		gContext.dog.nextMove();
-		gContext.dog.nextMove = nullptr;
-		glGetFloatv(GL_MODELVIEW_MATRIX, gContext.dog.local);
+		objects.dog.nextMove();
+		objects.dog.nextMove = nullptr;
+		glGetFloatv(GL_MODELVIEW_MATRIX, objects.dog.local);
 		glLoadMatrixf(viewModelMatrix);
-	}*/
+	}
 
 	/*//change viewing mode if in Doggy view setup
 	if (gContext.isDogView) {

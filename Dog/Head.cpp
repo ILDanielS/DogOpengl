@@ -12,27 +12,27 @@ void Head::draw() {
 
 	//head
 	glPushMatrix();
-	glTranslated(0.0f, 2.5f * 0.3f, 3.0f * 0.3f);
-	glScalef(1.5f * 0.3f, 1.55f * 0.3f, 1.6f * 0.3f);
+	glTranslated(0.0f, 0.7f, 0.9f);
+	glScalef(0.45f, 0.465f, 0.5f);
 	glutSolidSphere(1, 30, 30);
 	glPopMatrix();
 
 	//nose
 	glPushMatrix();
-	glTranslated(0.0f, 2.2f * 0.3f, 4.2f * 0.3f);
-	glScalef(0.8f * 0.3f, 0.5f * 0.3f, 1.5f * 0.3f);
+	glTranslated(0.0f, 0.6f, 1.3f);
+	glScalef(0.24f, 0.15f, 0.45f);
 	glutSolidSphere(1, 30, 30);
 	glPopMatrix();
 
 	//ears
 	glPushMatrix();
-	glTranslated(-0.8f * 0.3f, 3.8f * 0.3f, 2.6f * 0.3f);
-	glScalef(0.5f * 0.3f, 0.3f, 0.5f * 0.3f);
+	glTranslated(-0.24f, 1.14f, 0.78f);
+	glScalef(0.15f, 0.3f, 0.15f);
 	glutSolidSphere(1, 30, 30);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslated(0.8f * 0.3f, 3.8f * 0.3f, 2.6f * 0.3f);
+	glTranslated(0.24f, 3.8f * 0.3f, 2.6f * 0.3f);
 	glScalef(0.5f * 0.3f, 1.0f * 0.3f, 0.5f * 0.3f);
 	glutSolidSphere(1, 30, 30);
 	glPopMatrix();

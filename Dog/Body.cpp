@@ -3,7 +3,7 @@
 
 void Body::draw() {
 	glPushMatrix();
-	glScalef(2.0f * 0.3f, 2.0f * 0.3f, 4.0f * 0.3f);
+	glScalef(0.6f, 0.6f, 1.2f);
 	glutSolidSphere(1, 30, 30);
 	glPopMatrix();
 }

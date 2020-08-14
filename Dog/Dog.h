@@ -21,6 +21,7 @@ public:
 	bool isMoving;
 	void initialize();
 	void draw();
+	void setMoving(bool isMoving);
 	~Dog() = default;
 
 private:
