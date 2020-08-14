@@ -32,11 +32,17 @@
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="ball.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="Dog\Body.cpp" />
     <ClCompile Include="Dog\Dog.cpp" />
     <ClCompile Include="Dog\Head.cpp" />
     <ClCompile Include="Dog\Legs.cpp" />
     <ClCompile Include="Dog\Tail.cpp" />
+=======
+    <ClCompile Include="table.cpp" />
+    <ClCompile Include="spotlight.cpp" />
+    <ClCompile Include="lamp.cpp" />
+>>>>>>> master
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="objects.h">
@@ -57,6 +63,7 @@
     <ClInclude Include="ball.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Dog\Body.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -70,6 +77,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Dog\Tail.h">
+=======
+    <ClInclude Include="table.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="spotlight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lamp.h">
+>>>>>>> master
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

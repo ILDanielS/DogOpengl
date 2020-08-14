@@ -146,9 +146,12 @@
     <ClCompile Include="Dog\Legs.cpp" />
     <ClCompile Include="Dog\Tail.cpp" />
     <ClCompile Include="floor.cpp" />
+    <ClCompile Include="lamp.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="objects.cpp" />
+    <ClCompile Include="spotlight.cpp" />
     <ClCompile Include="stb_image.cpp" />
+    <ClCompile Include="table.cpp" />
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="walls.cpp" />
   </ItemGroup>
@@ -161,8 +164,11 @@
     <ClInclude Include="Dog\Legs.h" />
     <ClInclude Include="Dog\Tail.h" />
     <ClInclude Include="floor.h" />
+    <ClInclude Include="lamp.h" />
+    <ClInclude Include="spotlight.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="objects.h" />
+    <ClInclude Include="table.h" />
     <ClInclude Include="walls.h" />
   </ItemGroup>
   <ItemGroup>
