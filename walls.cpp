@@ -31,7 +31,8 @@ void Walls::loadTextures() {
 void Walls::drawWall() {
 
 	glEnable(GL_BLEND);
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+	glEnable(GL_TEXTURE_2D);
+	//glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 	int height = 10, width = 10;
 	GLfloat ambient[] = { 0.5f, 0.5f, 0.5f },
 		diffuse[] = { 0.9f, 0.9f, 0.9f },
@@ -43,7 +44,7 @@ void Walls::drawWall() {
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color);
 	
 	glBindTexture(GL_TEXTURE_2D, wall_texture);
-	glEnable(GL_TEXTURE_2D);
+	
 	GLuint err = glGetError();
 	glBegin(GL_QUADS);
 

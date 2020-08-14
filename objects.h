@@ -3,6 +3,9 @@
 #include "camera.h"
 #include "floor.h"
 #include "ball.h"
+#include "table.h"
+#include "spotlight.h"
+#include "lamp.h"
 
 
 class Objects {
@@ -13,5 +16,7 @@ public:
 	Floor floor;
 	Camera camera;
 	Ball ball;
-
+	Table table;
+	Spotlight spotlight;
+	Lamp lamp;
 };

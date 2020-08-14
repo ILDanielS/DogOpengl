@@ -32,6 +32,9 @@
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="ball.cpp" />
+    <ClCompile Include="table.cpp" />
+    <ClCompile Include="spotlight.cpp" />
+    <ClCompile Include="lamp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="objects.h">
@@ -50,6 +53,15 @@
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="ball.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="table.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="spotlight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lamp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

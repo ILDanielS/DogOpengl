@@ -138,11 +138,18 @@ void keyboard(int key, int, int) {
 }*/
 
 void drawScene() {
-	std::array<GLfloat, 3> pos = objects.ball.getPosition();
+	std::array<GLfloat, 3> pos = objects.lamp.getPosition();
 
 	glPushMatrix();
 	glTranslatef(pos[0], pos[1], pos[2]);
-	objects.ball.draw();
+	objects.lamp.draw();
+	glPopMatrix();
+
+	pos = objects.spotlight.getPosition();
+	glEnable(GL_LIGHT0);
+	glPushMatrix();
+	glTranslatef(pos[0], pos[1], pos[2]);
+	objects.spotlight.draw();
 	glPopMatrix();
 
 	/*
@@ -195,6 +202,7 @@ void drawScene() {
 	glPopMatrix();*/
 	objects.walls.draw({0,3});
 	objects.floor.draw();
+	objects.table.draw();
 
 
 }
@@ -268,7 +276,7 @@ void display() {
 		0, 1, 0);
 	
 	
-	GLfloat globalAmbientVec[4] = { 0.7f, 0.7f, 0.7f, 1.0 };
+	GLfloat globalAmbientVec[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalAmbientVec);
 
 	drawScene();
@@ -333,6 +341,7 @@ int main(int argc, char** argv) {
 	glutInitWindowSize(1200, 600);
 	glutCreateWindow("Dog Project");
 	glutDisplayFunc(display);
+	glutSpecialFunc(keyboard);
 
 	// Setup ImGui binding
 	/*ImGui::CreateContext();
@@ -341,7 +350,7 @@ int main(int argc, char** argv) {
 	ImGui_ImplFreeGLUT_InstallFuncs();
 	ImGui_ImplOpenGL2_Init();*/
 	
-	glutSpecialFunc(keyboard);
+	// Lighting properties
 	glShadeModel(GL_SMOOTH);
 	glEnable(GL_LIGHTING);
 	glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);

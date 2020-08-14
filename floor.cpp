@@ -5,11 +5,14 @@ Floor::Floor() : color1{ 0.64f, 0.44f, 0.30f, 0.5f }, color2{ 0.52f, 0.34f, 0.13
 void Floor::draw() {
 	glPushMatrix();
 
+	glEnable(GL_BLEND);
 	glBegin(GL_QUADS);	
-	GLfloat specular[] = { 1.0f, 1.0f, 1.0f },
-		shininess = 128.0f;
+	GLfloat specular[] = { 1.0f, 1.0f, 1.0f };
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specular);
-	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
+	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 128.0f);
+
+	glNormal3d(0, 1, 0);
+	
 
 	GLfloat* curr_color = color1;
 	bool c1 = true;
@@ -17,7 +20,7 @@ void Floor::draw() {
 		for (int j = startz; j < endz; j+=2) {
 			curr_color = (c1)? color1 : color2;
 			c1 = !c1;
-			glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, curr_color);
+			glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, curr_color);
 			glVertex3d(i, 0, j);
 			glVertex3d(i+1.0, 0, j);
 			glVertex3d(i+1.0, 0, j+2.0);
@@ -26,6 +29,6 @@ void Floor::draw() {
 	}
 
 	glEnd();
-
+	glDisable(GL_BLEND);
 	glPopMatrix();
 }
