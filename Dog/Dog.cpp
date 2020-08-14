@@ -1,31 +1,20 @@
-#include <Dog.h>
-#include <Body.h>
-#include <Head.h>
-#include <Leg.h>
-#include <Tail.h>
+#include "Dog.h"
 #include <gl\freeglut.h>
 
-Dog::Dog() :body(),
-			legs(),
-			head(),
-			tail(),
-			nextMove(nullptr)
-			isMoving(false);
+Dog::Dog(): nextMove(nullptr),
+isMoving(false) {};
 
-void Dog::init() {
-	GLfloat viewModelMatrix[16];
+void Dog::initialize() {
+	/*GLfloat viewModelMatrix[16];
 	glGetFloatv(GL_MODELVIEW_MATRIX, viewModelMatrix);
 	glLoadIdentity();
-
-	glRotatef(-90.0f, 0.0f, 1.0f, 0.0f);
-	glTranslatef(-0.5, 3.5f * 0.30f, -2.8f);
-
+	
 	glGetFloatv(GL_MODELVIEW_MATRIX, local);
-	glLoadMatrixf(viewModelMatrix);
+	glLoadMatrixf(viewModelMatrix);*/
 }
 
 void Dog::draw() {
-	dogInMovement();
+	this->dogInMovement();
 
 	glPushMatrix();
 	
@@ -38,10 +27,11 @@ void Dog::draw() {
 	glMaterialf(GL_FRONT, GL_SHININESS, dog_shininess);
 	glMaterialf(GL_FRONT, GL_EMISSION, 0);
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color);
-
-	body.draw();
-	head.draw();
+	
 	legs.draw();
+	body.draw();	
+	tail.draw();
+	head.draw();
 
 	glPopMatrix();
 }
@@ -49,4 +39,10 @@ void Dog::draw() {
 void Dog::dogInMovement() {
 	tail.movement();
 	legs.movement();
+}
+
+void Dog::setMoving(bool isMoving) {
+	this->isMoving = isMoving;
+	this->tail.setMoving(isMoving);
+	this->legs.setMoving(isMoving);
 }

@@ -2,8 +2,8 @@
 #include <iostream>
 #define PI 3.14159265
 
-Camera::Camera() :position{ 30.0f, 30.f ,30.0f },
-center{ 0.0f, 0.0f,0.0f } {}
+Camera::Camera() :position{ 30.0f, 30.f, 30.0f },
+center{ 0.0f, 0.0f, 0.0f } {}
 
 
 void Camera::setPosition(std::array<GLfloat, 3> pos)

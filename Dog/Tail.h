@@ -8,9 +8,9 @@ public:
 	bool isMoving;
 	GLfloat horizontalAngle;
 	GLfloat verticalAngle;
-	bool isMoving;
 	void draw();
 	void movement();
+	void setMoving(bool isMoving);
 	~Tail() = default;
 private:
 	GLfloat wiggleAngle;

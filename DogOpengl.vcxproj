@@ -140,6 +140,11 @@
   <ItemGroup>
     <ClCompile Include="ball.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="Dog\Body.cpp" />
+    <ClCompile Include="Dog\Dog.cpp" />
+    <ClCompile Include="Dog\Head.cpp" />
+    <ClCompile Include="Dog\Legs.cpp" />
+    <ClCompile Include="Dog\Tail.cpp" />
     <ClCompile Include="floor.cpp" />
     <ClCompile Include="lamp.cpp" />
     <ClCompile Include="main.cpp" />
@@ -153,6 +158,11 @@
   <ItemGroup>
     <ClInclude Include="ball.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="Dog\Body.h" />
+    <ClInclude Include="Dog\Dog.h" />
+    <ClInclude Include="Dog\Head.h" />
+    <ClInclude Include="Dog\Legs.h" />
+    <ClInclude Include="Dog\Tail.h" />
     <ClInclude Include="floor.h" />
     <ClInclude Include="lamp.h" />
     <ClInclude Include="spotlight.h" />

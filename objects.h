@@ -6,17 +6,18 @@
 #include "table.h"
 #include "spotlight.h"
 #include "lamp.h"
-
+#include "Dog/Dog.h"
 
 class Objects {
 public:
 	Objects() = default;
-	~Objects() = default;
 	Walls walls;
 	Floor floor;
 	Camera camera;
 	Ball ball;
+	Dog dog;
 	Table table;
 	Spotlight spotlight;
 	Lamp lamp;
+	~Objects() = default;
 };

@@ -4,7 +4,7 @@
 
 class Body {
 public:
-	Body();
+	Body() = default;
 	void draw();
 	~Body() = default;
 };

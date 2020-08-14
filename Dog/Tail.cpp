@@ -1,25 +1,20 @@
-#include <Dog.h>
-#include <Body.h>
-#include <Head.h>
-#include <Leg.h>
-#include <Tail.h>
+#include "Tail.h"
 #include <gl\freeglut.h>
 
 Tail::Tail() :isMoving(false),
-			  horizontalAngle(0.0f)
-			  verticalAngle(-10.0f),
-			  isMoving(false),
-			  wiggleAngle(0.0f),
-			  isMovingLeft(true);
+horizontalAngle(0.0f),
+verticalAngle(-10.0f),
+wiggleAngle(0.0f),
+isMovingLeft(true) {};
 
 void Tail::draw() {
 	glPushMatrix();
-	glTranslated(0.0f, 0.0f, -3.8f * 0.3f);
+	glTranslated(0.0f, 0.0f, -1.2f);
 	glRotatef(-30, 1, 0, 0);
-	glRotatef(tailVerticalAngle, 1, 0, 0);
-	glRotatef(tailHorizontalAngle, 0, 1, 0);
-	glRotatef(tailWiggleAngle, 0, 1, 0);
-	glScalef(0.5f * 0.3f, 0.5f * 0.3f, 1.8f * 0.3f);
+	glRotatef(verticalAngle, 1, 0, 0);
+	glRotatef(horizontalAngle, 0, 1, 0);
+	glRotatef(wiggleAngle, 0, 1, 0);
+	glScalef(0.15f, 0.15f, 0.5f);
 	glutSolidSphere(1, 30, 30);
 	glPopMatrix();
 }
@@ -39,4 +34,8 @@ void Tail::movement() {
 		}
 		isMoving = false;
 	}
+}
+
+void Tail::setMoving(bool isMoving) {
+	this->isMoving = isMoving;
 }
