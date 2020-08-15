@@ -20,19 +20,68 @@ void imguiConfig() {
 
 	ImGui::Begin("World Controls");
 	ImGui::Checkbox("Dog Eyes", &objects.isDogView);
-	ImGui::ColorEdit3("Ambient Color", reinterpret_cast<float*>(globalAmbientVec));
 
-	{ // lamp controls
+	if (ImGui::CollapsingHeader("Dog")) {
+		static GLfloat tailVertical = objects.dog.tail.verticalAngle;
+		static GLfloat tailHorizontal = objects.dog.tail.horizontalAngle;
+
+		ImGui::Text("Tail Settings");
+		ImGui::SliderFloat("Tail Horizontal Angle", &tailVertical, -30, 30);
+		ImGui::SliderFloat("Tail Vertical Angle", &tailHorizontal, -30, 30);
+
+		objects.dog.tail.verticalAngle = tailVertical;
+		objects.dog.tail.horizontalAngle = tailHorizontal;
+
+
+		static GLfloat headVertical = objects.dog.head.getVerticalAngle();
+		static GLfloat headHorizontal = objects.dog.head.getHorizontalAngle();
+
+		ImGui::Text("Head Settings");
+		ImGui::SliderFloat("Head Horizontal Angle", &headVertical, -30, 30);
+		ImGui::SliderFloat("Head Vertical Angle", &headHorizontal, -30, 30);
+
+		objects.dog.head.setHorizontalAngle(headHorizontal);
+		objects.dog.head.setVerticalAngle(headVertical);
+	}
+
+	if (ImGui::CollapsingHeader("Lights")) { 
+
+		ImGui::ColorEdit3("Ambient Color", reinterpret_cast<float*>(globalAmbientVec));
+
+		// lamp controls
 		ImGui::Checkbox("Lamp turn on", &lamp_on);
 		ImGui::ColorEdit3("Lamp light Color", reinterpret_cast<float*>(objects.lamp.color_arr));
-		objects.lamp.setState(lamp_on);
-	}
 
-	{
+		
+		// spotlight controls
+		static std::array<GLfloat, 3> location = objects.spotlight.getPosition();
+
 		ImGui::Checkbox("Spotlight turn on", &spotlight_on);
-		objects.spotlight.setState(spotlight_on);
-	}
+		ImGui::SliderFloat("Position X", &location[0], 0, 10);
+		ImGui::SliderFloat("Position Y", &location[1], 0, 10);
+		ImGui::SliderFloat("Position Z", &location[2], 0, 10);
 
+		objects.spotlight.setPosition(location);
+	}
+	objects.lamp.setState(lamp_on);
+	objects.spotlight.setState(spotlight_on);
+
+	if(ImGui::CollapsingHeader("Camera")){
+
+		static std::array<GLfloat, 3>  location = objects.camera.getPosition();
+		static std::array<GLfloat, 3> target = objects.camera.getCenter();
+		ImGui::SliderFloat("Cam Position X", &location[0], -30, 30);
+		ImGui::SliderFloat("Cam Position Y", &location[1], -30, 30);
+		ImGui::SliderFloat("Cam Position Z", &location[2], -30, 30);
+
+		ImGui::SliderFloat("Cam Target X", &target[0], 0, 10);
+		ImGui::SliderFloat("Cam Target Y", &target[1], 0, 10);
+		ImGui::SliderFloat("Cam Target Z", &target[2], 0, 10);
+
+		objects.camera.setPosition(location);
+		objects.camera.setCenter(target);
+
+	}
 
 	if (ImGui::Button("Quit")) {
 		exit(0);
@@ -202,7 +251,12 @@ void drawScene() {
 	glPopMatrix();
 	
 
-	objects.walls.draw({ 0,3 });
+	if (objects.isDogView) {
+		objects.walls.draw({ 0,1,2, 3 });
+	}
+	else {
+		objects.walls.draw({ 0, 3 });
+	}
 	objects.floor.draw();
 	objects.table.draw();
 
@@ -324,12 +378,10 @@ void display() {
 			0, 1, 0);
 	}
 
-	GLfloat globalAmbientVec[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalAmbientVec);
 
 	drawScene();
 	
-	////imgui does not handle light well
 	glDisable(GL_LIGHTING);
 	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
 	glEnable(GL_LIGHTING);
