@@ -22,7 +22,26 @@ void imguiConfig() {
 	ImGui::Checkbox("Dog Eyes", &objects.isDogView);
 
 	if (ImGui::CollapsingHeader("Dog")) {
+		static GLfloat tailVertical = objects.dog.tail.verticalAngle;
+		static GLfloat tailHorizontal = objects.dog.tail.horizontalAngle;
 
+		ImGui::Text("Tail Settings");
+		ImGui::SliderFloat("Tail Horizontal Angle", &tailVertical, -30, 30);
+		ImGui::SliderFloat("Tail Vertical Angle", &tailHorizontal, -30, 30);
+
+		objects.dog.tail.verticalAngle = tailVertical;
+		objects.dog.tail.horizontalAngle = tailHorizontal;
+
+
+		static GLfloat headVertical = objects.dog.head.getVerticalAngle();
+		static GLfloat headHorizontal = objects.dog.head.getHorizontalAngle();
+
+		ImGui::Text("Head Settings");
+		ImGui::SliderFloat("Head Horizontal Angle", &headVertical, -30, 30);
+		ImGui::SliderFloat("Head Vertical Angle", &headHorizontal, -30, 30);
+
+		objects.dog.head.setHorizontalAngle(headHorizontal);
+		objects.dog.head.setVerticalAngle(headVertical);
 	}
 
 	if (ImGui::CollapsingHeader("Lights")) { 
