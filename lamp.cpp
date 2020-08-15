@@ -1,6 +1,8 @@
 #include "lamp.h"
 
-Lamp::Lamp() : position({ 8.0f, 0, 8.0f }) {}
+Lamp::Lamp() : position({ 8.0f, 0, 8.0f }) {
+	glEnable(GL_LIGHT1);
+}
 
 void Lamp::draw() {
 	glRotated(-90, 1, 0, 0);
@@ -40,22 +42,17 @@ void Lamp::draw() {
 	gluCylinder(quad, 1.0f, 0.4f, 2.0f, 20, 20);
 
 
-	GLfloat color_arr[3] = { 1.0f, 0.56f, 0.16f };
+	//GLfloat color_arr[3] = { 1.0f, 0.56f, 0.16f };
 	//GLfloat pos_arr[3] = { position[0], position[1]+0.4f+0.2f, position[2] };
 	GLfloat pos_arr[3] = { 0,0,0 };
 	GLfloat dir_arr[3] = { 0, 0, -1 };
 
-	glEnable(GL_LIGHT1);
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, color_arr);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, color_arr);
 	glLightfv(GL_LIGHT1, GL_POSITION, pos_arr);
 	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, dir_arr);
 	glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 40.0f);
 	glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 0.0f);
-
-
-	
-
 }
 
 std::array<GLfloat, 3> Lamp::getPosition() {
@@ -63,5 +60,9 @@ std::array<GLfloat, 3> Lamp::getPosition() {
 }
 void Lamp::setPosition(std::array<GLfloat, 3> pos) {
 	position = pos;
+}
+
+void Lamp::setState(bool state) {
+	state ? glEnable(GL_LIGHT1) : glDisable(GL_LIGHT1);
 }
 
