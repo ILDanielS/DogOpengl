@@ -80,11 +80,12 @@ void Walls::draw(std::vector<int> index) {
 		case 2:
 			glTranslatef(10, 0, 10);
 			glRotated(180, 0, 1, 0);
+			break;
 
 		case 3:
 			glTranslatef(10, 0, 0);
 			glRotated(270, 0, 1, 0);
-
+			break;
 		}
 		this->drawWall();
 		glPopMatrix();

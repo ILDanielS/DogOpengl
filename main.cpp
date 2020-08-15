@@ -28,9 +28,23 @@ void imguiConfig() {
 		objects.lamp.setState(lamp_on);
 	}
 
-	{
+	{ // spotlight controls
+
+		static GLfloat location[3];
+		static GLfloat direction[3];
+
+		
+		location[0] = objects.spotlight.getPosition()[0];
+		location[1] = objects.spotlight.getPosition()[1];
+		location[2] = objects.spotlight.getPosition()[2];
+		
+
 		ImGui::Checkbox("Spotlight turn on", &spotlight_on);
+		ImGui::SliderFloat("Position X", &location[0], -5, 15);
+		ImGui::SliderFloat("Position Y", &location[1], -5, 15);
+		ImGui::SliderFloat("Position Z", &location[2], -5, 15);
 		objects.spotlight.setState(spotlight_on);
+		objects.spotlight.setPosition(location);
 	}
 
 
@@ -202,7 +216,12 @@ void drawScene() {
 	glPopMatrix();
 	
 
-	objects.walls.draw({ 0,3 });
+	if (objects.isDogView) {
+		objects.walls.draw({ 0,1,2, 3 });
+	}
+	else {
+		objects.walls.draw({ 0, 3 });
+	}
 	objects.floor.draw();
 	objects.table.draw();
 
@@ -324,12 +343,10 @@ void display() {
 			0, 1, 0);
 	}
 
-	GLfloat globalAmbientVec[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalAmbientVec);
 
 	drawScene();
 	
-	////imgui does not handle light well
 	glDisable(GL_LIGHTING);
 	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
 	glEnable(GL_LIGHTING);
