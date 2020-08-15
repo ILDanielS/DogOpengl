@@ -40,7 +40,7 @@ void Lamp::draw() {
 	gluCylinder(quad, 1.0f, 0.4f, 2.0f, 20, 20);
 
 
-	GLfloat color_arr[3] = { 1.0f, 0.56f, 0.16f };
+	//GLfloat color_arr[3] = { 1.0f, 0.56f, 0.16f };
 	//GLfloat pos_arr[3] = { position[0], position[1]+0.4f+0.2f, position[2] };
 	GLfloat pos_arr[3] = { 0,0,0 };
 	GLfloat dir_arr[3] = { 0, 0, -1 };
@@ -63,5 +63,9 @@ std::array<GLfloat, 3> Lamp::getPosition() {
 }
 void Lamp::setPosition(std::array<GLfloat, 3> pos) {
 	position = pos;
+}
+
+void Lamp::setState() {
+	glEnable(GL_LIGHT1);
 }
 

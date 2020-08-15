@@ -10,12 +10,30 @@ using namespace std;
 
 //single point of access to all rendered objects
 Objects objects;
-//static ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+
 static ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
+GLfloat globalAmbientVec[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
 
 void imguiConfig() {
+	static bool lamp_on = true;
+
 	ImGui::Begin("Hello, world!");
 	ImGui::Text("This is some useful text.");
+
+	ImGui::ColorEdit3("Ambient Color", reinterpret_cast<float*>(globalAmbientVec));
+
+	{
+		ImGui::Checkbox("Lamp turn on", &lamp_on);
+		ImGui::ColorEdit3("Lamp light Color", reinterpret_cast<float*>(objects.lamp.color_arr));
+
+
+
+	}
+
+
+	if (ImGui::Button("Quit")) {
+		exit(0);
+	}
 	ImGui::End();
 }
 
@@ -303,7 +321,7 @@ void display() {
 		0, 1, 0);
 	
 	
-	GLfloat globalAmbientVec[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
+	
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalAmbientVec);
 
 	drawScene();
