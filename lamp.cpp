@@ -1,6 +1,13 @@
 #include "lamp.h"
 
-Lamp::Lamp() : position({ 8.0f, 0, 8.0f }) {}
+Lamp::Lamp() : position({ 8.0f, 0, 8.0f }) {};
+
+std::array<GLfloat, 3> Lamp::getPosition() {
+	return this->position;
+}
+void Lamp::setPosition(std::array<GLfloat, 3> pos) {
+	this->position = pos;
+}
 
 void Lamp::draw() {
 	glRotated(-90, 1, 0, 0);
@@ -53,15 +60,4 @@ void Lamp::draw() {
 	glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 40.0f);
 	glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 0.0f);
 
-
-	
-
 }
-
-std::array<GLfloat, 3> Lamp::getPosition() {
-	return position;
-}
-void Lamp::setPosition(std::array<GLfloat, 3> pos) {
-	position = pos;
-}
-

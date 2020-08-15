@@ -4,6 +4,10 @@ Legs::Legs() :isMoving(false),
 angle(0.0f),
 isMovingStraight(true) {};
 
+void Legs::setMoving(bool isMoving) {
+	this->isMoving = isMoving;
+}
+
 void Legs::draw() {
 		
 	glPushMatrix();
@@ -48,10 +52,6 @@ void Legs::movement() {
 		else {
 			angle -= 6.0;
 		}
-		isMoving = false;
+		this->isMoving = false;
 	}
-}
-
-void Legs::setMoving(bool isMoving) {
-	this->isMoving = isMoving;
 }

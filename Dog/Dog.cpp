@@ -1,20 +1,41 @@
 #include "Dog.h"
 #include <gl\freeglut.h>
 
-Dog::Dog(): nextMove(nullptr),
+Dog::Dog() : position({ 5, 1.1f, 3 }),
+nextMove(nullptr),
 isMoving(false) {};
 
+std::array<GLfloat, 3> Dog::getPosition() {
+	return this->position;
+}
+void Dog::setPosition(std::array<GLfloat, 3> pos) {
+	this->position = pos;
+}
+
+void Dog::setMoving(bool isMoving) {
+	this->isMoving = isMoving;
+	this->tail.setMoving(isMoving);
+	this->legs.setMoving(isMoving);
+}
+
+bool Dog::getMoving() {
+	return this->isMoving;
+}
+
 void Dog::initialize() {
-	/*GLfloat viewModelMatrix[16];
+	GLfloat viewModelMatrix[16];
 	glGetFloatv(GL_MODELVIEW_MATRIX, viewModelMatrix);
 	glLoadIdentity();
+
+	glRotatef(-90.0f, 0.0f, 1.0f, 0.0f);
+	glTranslatef(-0.5f, 1, -2.8f);
 	
 	glGetFloatv(GL_MODELVIEW_MATRIX, local);
-	glLoadMatrixf(viewModelMatrix);*/
+	glLoadMatrixf(viewModelMatrix);
 }
 
 void Dog::draw() {
-	this->dogInMovement();
+	this->dogMovement();
 
 	glPushMatrix();
 	
@@ -36,13 +57,10 @@ void Dog::draw() {
 	glPopMatrix();
 }
 
-void Dog::dogInMovement() {
+void Dog::dogMovement() {
 	tail.movement();
-	legs.movement();
-}
-
-void Dog::setMoving(bool isMoving) {
-	this->isMoving = isMoving;
-	this->tail.setMoving(isMoving);
-	this->legs.setMoving(isMoving);
+	if (this->isMoving) {
+		legs.movement();
+		this->isMoving = false;
+	}
 }

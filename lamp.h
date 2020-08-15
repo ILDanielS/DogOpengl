@@ -3,8 +3,6 @@
 #include <gl\freeglut.h>
 class Lamp
 {
-
-	std::array<GLfloat, 3> position;
 public:
 	Lamp();
 	void draw();
@@ -12,5 +10,7 @@ public:
 
 	std::array<GLfloat, 3> getPosition();
 	void setPosition(std::array<GLfloat, 3> pos);
+private:
+	std::array<GLfloat, 3> position;
 };
 

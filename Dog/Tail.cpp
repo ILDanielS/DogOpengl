@@ -32,7 +32,7 @@ void Tail::movement() {
 		else {
 			wiggleAngle -= 1.7f;
 		}
-		isMoving = false;
+		//isMoving = false;
 	}
 }
 
