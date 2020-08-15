@@ -19,5 +19,6 @@ public:
 	Table table;
 	Spotlight spotlight;
 	Lamp lamp;
+	bool isDogView = false;
 	~Objects() = default;
 };

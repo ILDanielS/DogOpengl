@@ -158,12 +158,12 @@ void keyboard(int key, int, int) {
 	switch (key) {
 		case GLUT_KEY_LEFT:  
 			objects.dog.nextMove = []() { 
-				glRotatef(15, 0, 1, 0); 
+				glRotatef(10, 0, 1, 0); 
 			};
 			break;
 		case GLUT_KEY_RIGHT:
 			objects.dog.nextMove = []() { 
-				glRotatef(-15, 0, 1, 0); 
+				glRotatef(-10, 0, 1, 0); 
 			};
 			break;
 		case GLUT_KEY_UP:
@@ -182,8 +182,9 @@ void keyboard(int key, int, int) {
 }
 
 void drawScene() {
-	std::array<GLfloat, 3> pos = objects.lamp.getPosition();
-
+	std::array<GLfloat, 3> pos;
+	
+	pos = objects.lamp.getPosition();
 	glPushMatrix();
 	glTranslatef(pos[0], pos[1], pos[2]);
 	objects.lamp.draw();
@@ -194,12 +195,18 @@ void drawScene() {
 	glTranslatef(pos[0], pos[1], pos[2]);
 	objects.spotlight.draw();
 	glPopMatrix();
-
+	
 	glPushMatrix();
-	glTranslatef(5, 1.1, 3);
+	glMultMatrixf(objects.dog.local);
 	objects.dog.draw();
 	glPopMatrix();
 	
+
+	objects.walls.draw({ 0,3 });
+	objects.floor.draw();
+	objects.table.draw();
+
+
 	/*
 	glPushMatrix();
 	glTranslatef(gContext.pointlight.position[0], gContext.pointlight.position[1], gContext.pointlight.position[2]);
@@ -248,9 +255,6 @@ void drawScene() {
 	glTranslated(1.0f, 1.5f, -4.99f);
 	gContext.art.draw();
 	glPopMatrix();*/
-	objects.walls.draw({0,3});
-	objects.floor.draw();
-	objects.table.draw();
 }
 
 //display handling, rendering all objects
@@ -268,8 +272,6 @@ void display() {
 	glViewport(0, 0, (GLsizei)io.DisplaySize.x, (GLsizei)io.DisplaySize.y);
 	glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
 
-	
-
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -277,25 +279,26 @@ void display() {
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 		
-	//update the dog's transformation matrix
+	// Update the dog's transformation matrix
 	if (objects.dog.nextMove) {
 		objects.dog.setMoving(true);
 		GLfloat viewModelMatrix[16];
 		glGetFloatv(GL_MODELVIEW_MATRIX, viewModelMatrix);
+		glLoadMatrixf(objects.dog.local);
 		objects.dog.nextMove();
 		objects.dog.nextMove = nullptr;
 		glGetFloatv(GL_MODELVIEW_MATRIX, objects.dog.local);
 		glLoadMatrixf(viewModelMatrix);
 	}
 
-	/*//change viewing mode if in Doggy view setup
-	if (gContext.isDogView) {
+	// Change view point to Dog's eyes or camera based on flag
+	if (objects.isDogView) {
 		GLfloat viewModelMatrix[16];
 		glGetFloatv(GL_MODELVIEW_MATRIX, viewModelMatrix);
-		glLoadMatrixf(gContext.dog.local);
+		glLoadMatrixf(objects.dog.local);
 
-		glRotatef(gContext.dog.headVerticalAngle, 1, 0, 0);
-		glRotatef(gContext.dog.headHorizontalAngle, 0, 1, 0);
+		glRotatef(objects.dog.head.getVerticalAngle(), 1, 0, 0);
+		glRotatef(objects.dog.head.getHorizontalAngle(), 0, 1, 0);
 		glTranslated(0, 0.75, 0.9);
 
 		GLfloat cameraPoseInDogView[16];
@@ -312,23 +315,20 @@ void display() {
 			cos(zAngle) + cameraPoseInDogView[14],
 			0, 1, 0);
 	}
-	else*/
-	
-	//view mode of camera view setup
-	std::array<GLfloat, 3> camera_pos = objects.camera.getPosition();
-	std::array<GLfloat, 3> camera_center = objects.camera.getCenter();
-	gluLookAt(
-		camera_pos[0], camera_pos[1], camera_pos[2],
-		camera_center[0], camera_center[1], camera_center[2],
-		0, 1, 0);
-	
-	
-	
+	else {
+		std::array<GLfloat, 3> camera_pos = objects.camera.getPosition();
+		std::array<GLfloat, 3> camera_center = objects.camera.getCenter();
+		gluLookAt(
+			camera_pos[0], camera_pos[1], camera_pos[2],
+			camera_center[0], camera_center[1], camera_center[2],
+			0, 1, 0);
+	}
+
+	GLfloat globalAmbientVec[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalAmbientVec);
 
 	drawScene();
 	
-
 	////imgui does not handle light well
 	glDisable(GL_LIGHTING);
 	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
@@ -348,6 +348,8 @@ int main(int argc, char** argv) {
 	glutCreateWindow("Dog Project");
 	glutDisplayFunc(display);
 	glutSpecialFunc(keyboard);
+
+	objects.dog.initialize();
 
 	// Setup Dear ImGui context
 	IMGUI_CHECKVERSION();

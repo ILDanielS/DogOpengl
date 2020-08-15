@@ -5,6 +5,22 @@ Head::Head() : horizontalAngle(0.0f),
 verticalAngle(10.f),
 isMoving(false) {};
 
+GLfloat Head::getHorizontalAngle() {
+	return this->horizontalAngle;
+}
+
+void Head::setHorizontalAngle(GLfloat angle) {
+	this->horizontalAngle = angle;
+}
+
+GLfloat Head::getVerticalAngle() {
+	return this->verticalAngle;
+}
+
+void Head::setVerticalAngle(GLfloat angle) {
+	this->verticalAngle = angle;
+}
+
 void Head::draw() {
 	glPushMatrix();
 	glRotatef(verticalAngle, 1, 0, 0);
@@ -60,3 +76,4 @@ void Head::draw() {
 
 	glPopMatrix();
 }
+

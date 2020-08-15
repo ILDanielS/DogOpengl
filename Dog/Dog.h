@@ -1,4 +1,5 @@
 #pragma once
+#include <array>
 #include <GL/freeglut.h>
 #include <functional>
 #include "Body.h"
@@ -22,8 +23,12 @@ public:
 	void initialize();
 	void draw();
 	void setMoving(bool isMoving);
+	bool getMoving();
+	std::array<GLfloat, 3> getPosition();
+	void setPosition(std::array<GLfloat, 3> pos);
 	~Dog() = default;
 
 private:
-	void dogInMovement();
+	void dogMovement();
+	std::array<GLfloat, 3> position;
 };

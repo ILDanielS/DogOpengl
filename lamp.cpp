@@ -4,6 +4,13 @@ Lamp::Lamp() : position({ 8.0f, 0, 8.0f }) {
 	glEnable(GL_LIGHT1);
 }
 
+std::array<GLfloat, 3> Lamp::getPosition() {
+	return this->position;
+}
+void Lamp::setPosition(std::array<GLfloat, 3> pos) {
+	this->position = pos;
+}
+
 void Lamp::draw() {
 	glRotated(-90, 1, 0, 0);
 	GLUquadric* quad = gluNewQuadric();
@@ -55,14 +62,6 @@ void Lamp::draw() {
 	glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 0.0f);
 }
 
-std::array<GLfloat, 3> Lamp::getPosition() {
-	return position;
-}
-void Lamp::setPosition(std::array<GLfloat, 3> pos) {
-	position = pos;
-}
-
 void Lamp::setState(bool state) {
 	state ? glEnable(GL_LIGHT1) : glDisable(GL_LIGHT1);
 }
-
