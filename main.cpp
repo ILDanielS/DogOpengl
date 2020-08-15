@@ -19,7 +19,7 @@ void imguiConfig() {
 	static bool spotlight_on = true;
 
 	ImGui::Begin("World Controls");
-
+	ImGui::Checkbox("Dog Eyes", &objects.isDogView);
 	ImGui::ColorEdit3("Ambient Color", reinterpret_cast<float*>(globalAmbientVec));
 
 	{ // lamp controls
@@ -354,8 +354,6 @@ int main(int argc, char** argv) {
 	// Setup Dear ImGui context
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
-	//ImGuiIO& io = ImGui::GetIO(); (void)io;
-	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
 
 	// Setup Dear ImGui style
 	ImGui::StyleColorsDark();
