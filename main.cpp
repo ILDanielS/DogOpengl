@@ -1,15 +1,24 @@
 #include <windows.h>
 #include <iostream>
 #include <gl\GL.h>
-/*#include "imgui/imgui.h"
+#include "imgui/imgui.h"
 #include "imgui/imgui_impl_freeglut.h"
-#include "imgui/imgui_impl_opengl2.h"*/
+#include "imgui/imgui_impl_opengl2.h"
 #include <GL\freeglut.h>
 #include "objects.h"
 using namespace std;
 
 //single point of access to all rendered objects
 Objects objects;
+//static ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+static ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
+
+void imguiConfig() {
+	ImGui::Begin("Hello, world!");
+	ImGui::Text("This is some useful text.");
+	ImGui::End();
+}
+
 
 /*
 //gui interaction handling via imgui
@@ -227,19 +236,20 @@ void drawScene() {
 //display handling, rendering all objects
 void display() {
 
-	// Start the Dear ImGui frame
-	//ImGui_ImplOpenGL2_NewFrame();
-	//ImGui_ImplFreeGLUT_NewFrame();
+	 //Start the Dear ImGui frame
+	ImGui_ImplOpenGL2_NewFrame();
+	ImGui_ImplFreeGLUT_NewFrame();
 
-
-	/*	//update interaction
-	guiInteraction();
+	imguiConfig();
 
 	ImGui::Render();
-	ImGuiIO& io = ImGui::GetIO();*/
+	ImGuiIO& io = ImGui::GetIO();
 
-	//glViewport(0, 0, (GLsizei)io.DisplaySize.x, (GLsizei)io.DisplaySize.y);
-	glViewport(0, 0, 1000 ,800);
+	glViewport(0, 0, (GLsizei)io.DisplaySize.x, (GLsizei)io.DisplaySize.y);
+	glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
+
+	
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -297,53 +307,12 @@ void display() {
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalAmbientVec);
 
 	drawScene();
-	/*
-	//create mirror effect
-	glEnable(GL_STENCIL_TEST);
-	glColorMask(0, 0, 0, 0); //Disable drawing colors to the screen
-	glDisable(GL_DEPTH_TEST); //Disable depth testing
-	glStencilFunc(GL_ALWAYS, 1, 1); //Make the stencil test always pass
-									//Make pixels in the stencil buffer be set to 1 when the stencil test passes
-	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-	//Set all of the pixels covered by the mirror to be 1 in the stencil buffer
-	glPushMatrix();
-	glRotatef(90, 0, 1, 0);
-	glTranslatef(-1, 0.2f, 4.99f);
-	gContext.mirror.draw();
-	glPopMatrix();
+	
 
-	glColorMask(1, 1, 1, 1); //Enable drawing colors to the screen
-	glEnable(GL_DEPTH_TEST); //Enable depth testing
-							 //Make the stencil test pass only when the pixel is 1 in the stencil buffer
-	glStencilFunc(GL_EQUAL, 1, 1);
-	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP); //Make the stencil buffer not change
-
-	//Draw the scene, reflected in the mirror
-	glPushMatrix();
-	glTranslatef(10.001f, 0, 0);
-	glScalef(-1, 1, 1);
-	drawScene();
-	glPopMatrix();
-
-	glDisable(GL_STENCIL_TEST); //Disable using the stencil buffer
-
-	//Blend the mirror onto the screen
-	glEnable(GL_BLEND);
-	glPushMatrix();
-	glRotatef(90, 0, 1, 0);
-	glTranslatef(-1, 0.2f, 4.99f);
-	gContext.mirror.draw();
-	glPopMatrix();
-	glDisable(GL_BLEND);
-
-	//add the wall next to the mirror
-	gContext.walls.draw({ 2 });
-
-	//imgui does not handle light well
+	////imgui does not handle light well
 	glDisable(GL_LIGHTING);
 	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
 	glEnable(GL_LIGHTING);
-	*/
 
 	glFlush();
 	glutSwapBuffers();
@@ -353,19 +322,25 @@ void display() {
 int main(int argc, char** argv) {
 	glutInit(&argc, argv);
 	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH | GLUT_MULTISAMPLE | GLUT_STENCIL);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH | GLUT_MULTISAMPLE);
 	glutInitWindowPosition(80, 80);
-	glutInitWindowSize(1200, 600);
+	glutInitWindowSize(1280, 720);
 	glutCreateWindow("Dog Project");
 	glutDisplayFunc(display);
 	glutSpecialFunc(keyboard);
 
-	// Setup ImGui binding
-	/*ImGui::CreateContext();
+	// Setup Dear ImGui context
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	//ImGuiIO& io = ImGui::GetIO(); (void)io;
+	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+
+	// Setup Dear ImGui style
+	ImGui::StyleColorsDark();
 
 	ImGui_ImplFreeGLUT_Init();
 	ImGui_ImplFreeGLUT_InstallFuncs();
-	ImGui_ImplOpenGL2_Init();*/
+	ImGui_ImplOpenGL2_Init();
 	
 	// Lighting properties
 	glShadeModel(GL_SMOOTH);
@@ -375,19 +350,12 @@ int main(int argc, char** argv) {
 	glEnable(GL_NORMALIZE);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	/*objects.pointlight.enable();
-	objects.spotlight.enable();
-	objects.dog.init();
-	objects.art.init();
-
-	// Setup style
-	ImGui::StyleColorsClassic();*/
 	glutMainLoop();
-	/*
+	
 	// Cleanup
 	ImGui_ImplOpenGL2_Shutdown();
 	ImGui_ImplFreeGLUT_Shutdown();
 	ImGui::DestroyContext();
-	*/
+	
 	return 0;
 }
