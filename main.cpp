@@ -16,18 +16,21 @@ GLfloat globalAmbientVec[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
 
 void imguiConfig() {
 	static bool lamp_on = true;
+	static bool spotlight_on = true;
 
-	ImGui::Begin("Hello, world!");
-	ImGui::Text("This is some useful text.");
+	ImGui::Begin("World Controls");
 
 	ImGui::ColorEdit3("Ambient Color", reinterpret_cast<float*>(globalAmbientVec));
 
-	{
+	{ // lamp controls
 		ImGui::Checkbox("Lamp turn on", &lamp_on);
 		ImGui::ColorEdit3("Lamp light Color", reinterpret_cast<float*>(objects.lamp.color_arr));
+		objects.lamp.setState(lamp_on);
+	}
 
-
-
+	{
+		ImGui::Checkbox("Spotlight turn on", &spotlight_on);
+		objects.spotlight.setState(spotlight_on);
 	}
 
 
@@ -187,7 +190,6 @@ void drawScene() {
 	glPopMatrix();
 
 	pos = objects.spotlight.getPosition();
-	glEnable(GL_LIGHT0);
 	glPushMatrix();
 	glTranslatef(pos[0], pos[1], pos[2]);
 	objects.spotlight.draw();

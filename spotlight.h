@@ -12,5 +12,6 @@ public:
 	void draw();
 
 	std::array<GLfloat, 3> getPosition();
+	void setState(bool);
 };
 
