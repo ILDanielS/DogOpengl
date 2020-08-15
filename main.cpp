@@ -347,7 +347,7 @@ int main(int argc, char** argv) {
 	glutInitWindowSize(1280, 720);
 	glutCreateWindow("Dog Project");
 	glutDisplayFunc(display);
-	glutSpecialFunc(keyboard);
+
 
 	objects.dog.initialize();
 
@@ -363,6 +363,8 @@ int main(int argc, char** argv) {
 	ImGui_ImplFreeGLUT_Init();
 	ImGui_ImplFreeGLUT_InstallFuncs();
 	ImGui_ImplOpenGL2_Init();
+
+	glutSpecialFunc(keyboard);
 	
 	// Lighting properties
 	glShadeModel(GL_SMOOTH);
