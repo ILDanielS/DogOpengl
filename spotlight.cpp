@@ -11,10 +11,10 @@ void Spotlight::draw() {
 	quad = gluNewQuadric();
 
 	GLfloat color_arr[3] = { color[0], color[1], color[2] };
-	GLfloat pos_arr[3] = { position[0], position[1], position[2] };
+	//GLfloat pos_arr[3] = { position[0], position[1], position[2] };
+	GLfloat pos_arr[3] = { 0,0,0 };
 	GLfloat dir_arr[3] = { lookat[0]-position[0], lookat[1] - position[1], lookat[2] - position[2] };
-	if (!glIsEnabled(GL_LIGHT0))
-		return;
+
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, color_arr);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, color_arr);
 	glLightfv(GL_LIGHT0, GL_POSITION, pos_arr);
@@ -29,6 +29,9 @@ void Spotlight::draw() {
 
 	
 
+}
+void Spotlight::setState(bool state) {
+	state ? glEnable(GL_LIGHT0) : glDisable(GL_LIGHT0);
 }
 
 std::array<GLfloat, 3> Spotlight::getPosition() {
