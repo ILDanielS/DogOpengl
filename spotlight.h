@@ -13,7 +13,7 @@ public:
 	void draw();
 
 	std::array<GLfloat, 3> getPosition();
-	void setPosition(GLfloat pos[3]);
+	void setPosition(std::array<GLfloat, 3> pos);
 	void setState(bool);
 };
 

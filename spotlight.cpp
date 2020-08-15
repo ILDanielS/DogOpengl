@@ -39,8 +39,6 @@ std::array<GLfloat, 3> Spotlight::getPosition() {
 	return position;
 }
 
-void Spotlight::setPosition(GLfloat pos[3]) {
-	position[0] = pos[0];
-	position[1] = pos[1];
-	position[2] = pos[2];
+void Spotlight::setPosition(std::array<GLfloat, 3> pos) {
+	position = pos;
 }

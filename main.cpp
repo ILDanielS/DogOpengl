@@ -20,33 +20,49 @@ void imguiConfig() {
 
 	ImGui::Begin("World Controls");
 	ImGui::Checkbox("Dog Eyes", &objects.isDogView);
-	ImGui::ColorEdit3("Ambient Color", reinterpret_cast<float*>(globalAmbientVec));
 
-	{ // lamp controls
+	if (ImGui::CollapsingHeader("Dog")) {
+
+	}
+
+	if (ImGui::CollapsingHeader("Lights")) { 
+
+		ImGui::ColorEdit3("Ambient Color", reinterpret_cast<float*>(globalAmbientVec));
+
+		// lamp controls
 		ImGui::Checkbox("Lamp turn on", &lamp_on);
 		ImGui::ColorEdit3("Lamp light Color", reinterpret_cast<float*>(objects.lamp.color_arr));
-		objects.lamp.setState(lamp_on);
-	}
-
-	{ // spotlight controls
-
-		static GLfloat location[3];
-		static GLfloat direction[3];
 
 		
-		location[0] = objects.spotlight.getPosition()[0];
-		location[1] = objects.spotlight.getPosition()[1];
-		location[2] = objects.spotlight.getPosition()[2];
-		
+		// spotlight controls
+		static std::array<GLfloat, 3> location = objects.spotlight.getPosition();
 
 		ImGui::Checkbox("Spotlight turn on", &spotlight_on);
-		ImGui::SliderFloat("Position X", &location[0], -5, 15);
-		ImGui::SliderFloat("Position Y", &location[1], -5, 15);
-		ImGui::SliderFloat("Position Z", &location[2], -5, 15);
-		objects.spotlight.setState(spotlight_on);
+		ImGui::SliderFloat("Position X", &location[0], 0, 10);
+		ImGui::SliderFloat("Position Y", &location[1], 0, 10);
+		ImGui::SliderFloat("Position Z", &location[2], 0, 10);
+
 		objects.spotlight.setPosition(location);
 	}
+	objects.lamp.setState(lamp_on);
+	objects.spotlight.setState(spotlight_on);
 
+	if(ImGui::CollapsingHeader("Camera")){
+
+		static std::array<GLfloat, 3>  location = objects.camera.getPosition();
+		static std::array<GLfloat, 3> target = objects.camera.getCenter();
+		ImGui::SliderFloat("Cam Position X", &location[0], -30, 30);
+		ImGui::SliderFloat("Cam Position Y", &location[1], -30, 30);
+		ImGui::SliderFloat("Cam Position Z", &location[2], -30, 30);
+
+		ImGui::SliderFloat("Cam Target X", &target[0], 0, 10);
+		ImGui::SliderFloat("Cam Target Y", &target[1], 0, 10);
+		ImGui::SliderFloat("Cam Target Z", &target[2], 0, 10);
+
+		objects.camera.setPosition(location);
+		objects.camera.setCenter(target);
+
+	}
 
 	if (ImGui::Button("Quit")) {
 		exit(0);
