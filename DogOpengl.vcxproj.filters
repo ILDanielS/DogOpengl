@@ -1,93 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Scene">
-      <UniqueIdentifier>{f257f0ea-4a2a-41d6-bd79-466f96f3667d}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="walls.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="camera.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="objects.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="floor.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="utils.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="stb_image.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="ball.cpp" />
-<<<<<<< HEAD
+    <ClCompile Include="camera.cpp" />
     <ClCompile Include="Dog\Body.cpp" />
     <ClCompile Include="Dog\Dog.cpp" />
     <ClCompile Include="Dog\Head.cpp" />
     <ClCompile Include="Dog\Legs.cpp" />
     <ClCompile Include="Dog\Tail.cpp" />
-=======
-    <ClCompile Include="table.cpp" />
-    <ClCompile Include="spotlight.cpp" />
+    <ClCompile Include="floor.cpp" />
     <ClCompile Include="lamp.cpp" />
->>>>>>> master
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="objects.cpp" />
+    <ClCompile Include="spotlight.cpp" />
+    <ClCompile Include="stb_image.cpp" />
+    <ClCompile Include="table.cpp" />
+    <ClCompile Include="utils.cpp" />
+    <ClCompile Include="walls.cpp" />
+    <ClCompile Include="imgui\imgui.cpp" />
+    <ClCompile Include="imgui\imgui_impl_freeglut.cpp" />
+    <ClCompile Include="imgui\imgui_impl_opengl2.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="objects.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="walls.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="camera.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="stb_image.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="floor.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="ball.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="Dog\Body.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dog\Dog.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dog\Head.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dog\Legs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dog\Tail.h">
-=======
-    <ClInclude Include="table.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="spotlight.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lamp.h">
->>>>>>> master
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClInclude Include="ball.h" />
+    <ClInclude Include="camera.h" />
+    <ClInclude Include="Dog\Body.h" />
+    <ClInclude Include="Dog\Dog.h" />
+    <ClInclude Include="Dog\Head.h" />
+    <ClInclude Include="Dog\Legs.h" />
+    <ClInclude Include="Dog\Tail.h" />
+    <ClInclude Include="floor.h" />
+    <ClInclude Include="lamp.h" />
+    <ClInclude Include="spotlight.h" />
+    <ClInclude Include="stb_image.h" />
+    <ClInclude Include="objects.h" />
+    <ClInclude Include="table.h" />
+    <ClInclude Include="walls.h" />
+    <ClInclude Include="imgui\imconfig.h" />
+    <ClInclude Include="imgui\imgui.h" />
+    <ClInclude Include="imgui\imgui_impl_freeglut.h" />
+    <ClInclude Include="imgui\imgui_impl_opengl2.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\bricks.jpg" />
