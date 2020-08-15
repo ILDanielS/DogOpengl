@@ -29,27 +29,27 @@ bool ImGui_ImplFreeGLUT_Init()
     g_Time = 0;
 
     // Glut has 1 function for characters and one for "special keys". We map the characters in the 0..255 range and the keys above.
-    io.KeyMap[ImGuiKey_Tab] = '\t'; // == 9 == CTRL+I
-    io.KeyMap[ImGuiKey_LeftArrow] = 256 + GLUT_KEY_LEFT;
-    io.KeyMap[ImGuiKey_RightArrow] = 256 + GLUT_KEY_RIGHT;
-    io.KeyMap[ImGuiKey_UpArrow] = 256 + GLUT_KEY_UP;
-    io.KeyMap[ImGuiKey_DownArrow] = 256 + GLUT_KEY_DOWN;
-    io.KeyMap[ImGuiKey_PageUp] = 256 + GLUT_KEY_PAGE_UP;
-    io.KeyMap[ImGuiKey_PageDown] = 256 + GLUT_KEY_PAGE_DOWN;
-    io.KeyMap[ImGuiKey_Home] = 256 + GLUT_KEY_HOME;
-    io.KeyMap[ImGuiKey_End] = 256 + GLUT_KEY_END;
-    io.KeyMap[ImGuiKey_Insert] = 256 + GLUT_KEY_INSERT;
-    io.KeyMap[ImGuiKey_Delete] = 127;
-    io.KeyMap[ImGuiKey_Backspace] = 8;  // == CTRL+H
-    io.KeyMap[ImGuiKey_Space] = ' ';
-    io.KeyMap[ImGuiKey_Enter] = 13; // == CTRL+M
-    io.KeyMap[ImGuiKey_Escape] = 27;
-    io.KeyMap[ImGuiKey_A] = 'A';
-    io.KeyMap[ImGuiKey_C] = 'C';
-    io.KeyMap[ImGuiKey_V] = 'V';
-    io.KeyMap[ImGuiKey_X] = 'X';
-    io.KeyMap[ImGuiKey_Y] = 'Y';
-    io.KeyMap[ImGuiKey_Z] = 'Z';
+    io.KeyMap[ImGuiKey_Tab]         = '\t'; // == 9 == CTRL+I
+    io.KeyMap[ImGuiKey_LeftArrow]   = 256 + GLUT_KEY_LEFT;
+    io.KeyMap[ImGuiKey_RightArrow]  = 256 + GLUT_KEY_RIGHT;
+    io.KeyMap[ImGuiKey_UpArrow]     = 256 + GLUT_KEY_UP;
+    io.KeyMap[ImGuiKey_DownArrow]   = 256 + GLUT_KEY_DOWN;
+    io.KeyMap[ImGuiKey_PageUp]      = 256 + GLUT_KEY_PAGE_UP;
+    io.KeyMap[ImGuiKey_PageDown]    = 256 + GLUT_KEY_PAGE_DOWN;
+    io.KeyMap[ImGuiKey_Home]        = 256 + GLUT_KEY_HOME;
+    io.KeyMap[ImGuiKey_End]         = 256 + GLUT_KEY_END;
+    io.KeyMap[ImGuiKey_Insert]      = 256 + GLUT_KEY_INSERT;
+    io.KeyMap[ImGuiKey_Delete]      = 127;
+    io.KeyMap[ImGuiKey_Backspace]   = 8;  // == CTRL+H
+    io.KeyMap[ImGuiKey_Space]       = ' ';
+    io.KeyMap[ImGuiKey_Enter]       = 13; // == CTRL+M
+    io.KeyMap[ImGuiKey_Escape]      = 27;
+    io.KeyMap[ImGuiKey_A]           = 'A';
+    io.KeyMap[ImGuiKey_C]           = 'C';
+    io.KeyMap[ImGuiKey_V]           = 'V';
+    io.KeyMap[ImGuiKey_X]           = 'X';
+    io.KeyMap[ImGuiKey_Y]           = 'Y';
+    io.KeyMap[ImGuiKey_Z]           = 'Z';
 
     return true;
 }

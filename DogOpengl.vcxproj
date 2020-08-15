@@ -147,6 +147,8 @@
     <ClCompile Include="Dog\Tail.cpp" />
     <ClCompile Include="floor.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
+    <ClCompile Include="imgui\imgui_demo.cpp" />
+    <ClCompile Include="imgui\imgui_draw.cpp" />
     <ClCompile Include="imgui\imgui_impl_freeglut.cpp" />
     <ClCompile Include="imgui\imgui_impl_opengl2.cpp" />
     <ClCompile Include="lamp.cpp" />
@@ -171,6 +173,10 @@
     <ClInclude Include="imgui\imgui.h" />
     <ClInclude Include="imgui\imgui_impl_freeglut.h" />
     <ClInclude Include="imgui\imgui_impl_opengl2.h" />
+    <ClInclude Include="imgui\imgui_internal.h" />
+    <ClInclude Include="imgui\stb_rect_pack.h" />
+    <ClInclude Include="imgui\stb_textedit.h" />
+    <ClInclude Include="imgui\stb_truetype.h" />
     <ClInclude Include="lamp.h" />
     <ClInclude Include="spotlight.h" />
     <ClInclude Include="stb_image.h" />
@@ -183,6 +189,9 @@
     <Image Include="textures\tst.bmp" />
     <Image Include="textures\walls.bmp" />
     <Image Include="textures\walls.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imgui\imgui.ini" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

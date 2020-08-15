@@ -226,11 +226,13 @@ void drawScene() {
 
 //display handling, rendering all objects
 void display() {
-/*	//imgui new frame
-	ImGui_ImplOpenGL2_NewFrame();
-	ImGui_ImplFreeGLUT_NewFrame();
 
-	//update interaction
+	// Start the Dear ImGui frame
+	//ImGui_ImplOpenGL2_NewFrame();
+	//ImGui_ImplFreeGLUT_NewFrame();
+
+
+	/*	//update interaction
 	guiInteraction();
 
 	ImGui::Render();
