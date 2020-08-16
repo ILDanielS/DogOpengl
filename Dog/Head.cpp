@@ -5,6 +5,14 @@ Head::Head() : horizontalAngle(0.0f),
 verticalAngle(10.f),
 isMoving(false) {};
 
+bool Head::getIsMoving() {
+	return this->isMoving;
+}
+
+void Head::setIsMoving(bool isMoving) {
+	this->isMoving = isMoving;
+}
+
 GLfloat Head::getHorizontalAngle() {
 	return this->horizontalAngle;
 }
