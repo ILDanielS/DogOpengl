@@ -13,22 +13,22 @@
 class Dog {
 public:
 	Dog();
-	GLfloat local[16];
 	Body body;
 	Legs legs;
 	Head head;
 	Tail tail;
-	std::function<void()>nextMove;
-	bool isMoving;
-	void initialize();
-	void draw();
-	void setMoving(bool isMoving);
-	bool getMoving();
+	void setIsMoving(bool isMoving);
+	bool getIsMoving();
+	GLfloat localAxys[16];
 	std::array<GLfloat, 3> getPosition();
 	void setPosition(std::array<GLfloat, 3> pos);
+	std::function<void()>nextMove;	
+	void initialize();
+	void draw();
 	~Dog() = default;
 
 private:
-	void dogMovement();
+	bool isMoving;
 	std::array<GLfloat, 3> position;
+	void dogMovement();
 };

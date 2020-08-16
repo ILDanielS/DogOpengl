@@ -5,12 +5,15 @@
 class Legs {
 public:
 	Legs();
-	bool isMoving;
+	bool getIsMoving();
+	void setIsMoving(bool isMoving);
+	GLfloat getAngle();
+	void setAngle(GLfloat angle);
 	void draw();
 	void movement();
-	void setMoving(bool isMoving);
 	~Legs() = default;
 private:
+	bool isMoving;
 	GLfloat angle;
 	bool isMovingStraight;
 };

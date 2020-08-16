@@ -22,16 +22,15 @@ void imguiConfig() {
 	ImGui::Checkbox("Dog Eyes", &objects.isDogView);
 
 	if (ImGui::CollapsingHeader("Dog")) {
-		static GLfloat tailVertical = objects.dog.tail.verticalAngle;
-		static GLfloat tailHorizontal = objects.dog.tail.horizontalAngle;
+		static GLfloat tailVertical = objects.dog.tail.getVerticalAngle();
+		static GLfloat tailHorizontal = objects.dog.tail.getHorizontalAngle();
 
 		ImGui::Text("Tail Settings");
 		ImGui::SliderFloat("Tail Horizontal Angle", &tailVertical, -30, 30);
 		ImGui::SliderFloat("Tail Vertical Angle", &tailHorizontal, -30, 30);
 
-		objects.dog.tail.verticalAngle = tailVertical;
-		objects.dog.tail.horizontalAngle = tailHorizontal;
-
+		objects.dog.tail.setVerticalAngle(tailVertical);
+		objects.dog.tail.setHorizontalAngle(tailHorizontal);
 
 		static GLfloat headVertical = objects.dog.head.getVerticalAngle();
 		static GLfloat headHorizontal = objects.dog.head.getHorizontalAngle();
@@ -80,7 +79,6 @@ void imguiConfig() {
 
 		objects.camera.setPosition(location);
 		objects.camera.setCenter(target);
-
 	}
 
 	if (ImGui::Button("Quit")) {
@@ -88,7 +86,6 @@ void imguiConfig() {
 	}
 	ImGui::End();
 }
-
 
 /*
 //gui interaction handling via imgui
@@ -246,7 +243,7 @@ void drawScene() {
 	glPopMatrix();
 	
 	glPushMatrix();
-	glMultMatrixf(objects.dog.local);
+	glMultMatrixf(objects.dog.localAxys);
 	objects.dog.draw();
 	glPopMatrix();
 	
@@ -335,13 +332,13 @@ void display() {
 		
 	// Update the dog's transformation matrix
 	if (objects.dog.nextMove) {
-		objects.dog.setMoving(true);
+		objects.dog.setIsMoving(true);
 		GLfloat viewModelMatrix[16];
 		glGetFloatv(GL_MODELVIEW_MATRIX, viewModelMatrix);
-		glLoadMatrixf(objects.dog.local);
+		glLoadMatrixf(objects.dog.localAxys);
 		objects.dog.nextMove();
 		objects.dog.nextMove = nullptr;
-		glGetFloatv(GL_MODELVIEW_MATRIX, objects.dog.local);
+		glGetFloatv(GL_MODELVIEW_MATRIX, objects.dog.localAxys);
 		glLoadMatrixf(viewModelMatrix);
 	}
 
@@ -349,7 +346,7 @@ void display() {
 	if (objects.isDogView) {
 		GLfloat viewModelMatrix[16];
 		glGetFloatv(GL_MODELVIEW_MATRIX, viewModelMatrix);
-		glLoadMatrixf(objects.dog.local);
+		glLoadMatrixf(objects.dog.localAxys);
 
 		glRotatef(objects.dog.head.getVerticalAngle(), 1, 0, 0);
 		glRotatef(objects.dog.head.getHorizontalAngle(), 0, 1, 0);

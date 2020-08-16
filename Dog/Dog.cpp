@@ -5,21 +5,22 @@ Dog::Dog() : position({ 5, 1.1f, 3 }),
 nextMove(nullptr),
 isMoving(false) {};
 
+void Dog::setIsMoving(bool isMoving) {
+	this->isMoving = isMoving;
+	this->tail.setIsMoving(isMoving);
+	this->legs.setIsMoving(isMoving);
+}
+
+bool Dog::getIsMoving() {
+	return this->isMoving;
+}
+
 std::array<GLfloat, 3> Dog::getPosition() {
 	return this->position;
 }
+
 void Dog::setPosition(std::array<GLfloat, 3> pos) {
 	this->position = pos;
-}
-
-void Dog::setMoving(bool isMoving) {
-	this->isMoving = isMoving;
-	this->tail.setMoving(isMoving);
-	this->legs.setMoving(isMoving);
-}
-
-bool Dog::getMoving() {
-	return this->isMoving;
 }
 
 void Dog::initialize() {
@@ -27,10 +28,10 @@ void Dog::initialize() {
 	glGetFloatv(GL_MODELVIEW_MATRIX, viewModelMatrix);
 	glLoadIdentity();
 
-	glRotatef(-90.0f, 0.0f, 1.0f, 0.0f);
-	glTranslatef(-0.5f, 1, -2.8f);
+	//glRotatef(-90.0f, 0.0f, 1.0f, 0.0f);
+	glTranslatef(4, 4, 4);
 	
-	glGetFloatv(GL_MODELVIEW_MATRIX, local);
+	glGetFloatv(GL_MODELVIEW_MATRIX, localAxys);
 	glLoadMatrixf(viewModelMatrix);
 }
 
@@ -39,7 +40,7 @@ void Dog::draw() {
 
 	glPushMatrix();
 	
-	GLfloat color[4] = { 0.92f, 0.814f, 0.382f, 1.0f },
+	GLfloat color[4] = { 0.819f, 0.607f, 0.243f, 1.0f },
 			dog_specular[] = { 0.1f, 0.1f, 0.1f },
 			dog_shininess = 0.1f;
 	
@@ -50,7 +51,7 @@ void Dog::draw() {
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color);
 	
 	legs.draw();
-	body.draw();	
+	body.draw();
 	tail.draw();
 	head.draw();
 
@@ -58,7 +59,6 @@ void Dog::draw() {
 }
 
 void Dog::dogMovement() {
-	tail.movement();
 	if (this->isMoving) {
 		legs.movement();
 		this->isMoving = false;

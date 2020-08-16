@@ -5,14 +5,19 @@
 class Tail {
 public:
 	Tail();
+	bool getIsMoving();
+	void setIsMoving(bool isMoving);
+	GLfloat getHorizontalAngle();
+	void setHorizontalAngle(GLfloat angle);
+	GLfloat getVerticalAngle();
+	void setVerticalAngle(GLfloat angle);
+	GLfloat getWiggleAngle();
+	void setWiggleAngle(GLfloat angle);
+	void draw();
+	~Tail() = default;
+private:
 	bool isMoving;
 	GLfloat horizontalAngle;
 	GLfloat verticalAngle;
-	void draw();
-	void movement();
-	void setMoving(bool isMoving);
-	~Tail() = default;
-private:
 	GLfloat wiggleAngle;
-	bool isMovingLeft;
 };

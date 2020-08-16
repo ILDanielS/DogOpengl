@@ -4,8 +4,20 @@ Legs::Legs() :isMoving(false),
 angle(0.0f),
 isMovingStraight(true) {};
 
-void Legs::setMoving(bool isMoving) {
+bool Legs::getIsMoving() {
+	return this->isMoving;
+}
+
+void Legs::setIsMoving(bool isMoving) {
 	this->isMoving = isMoving;
+}
+
+GLfloat Legs::getAngle() {
+	return this->angle;
+}
+
+void Legs::setAngle(GLfloat angle) {
+	this->angle = angle;
 }
 
 void Legs::draw() {
