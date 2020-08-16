@@ -84,6 +84,7 @@ void imguiConfig() {
 	if (ImGui::CollapsingHeader("Help")) {
 		ImGui::Text("There are few control options avaliable:");
 		ImGui::TextWrapped("In the dog menu, you can change the dog head position, his tail position.");
+		ImGui::TextWrapped("The dog can move by using the arrows keys in the keyboard");
 		ImGui::Text("-----------------------------------------------------------------------");
 		ImGui::TextWrapped("In the light menu, you can change the spotlight position and light, the ambient light values and the lamp light.");
 		ImGui::Text("-----------------------------------------------------------------------");
@@ -91,6 +92,7 @@ void imguiConfig() {
 		ImGui::Text("-----------------------------------------------------------------------");
 		ImGui::TextWrapped("In addition, you can change the view to the dog POV and to a global prespective.");
 		ImGui::Text("-----------------------------------------------------------------------");
+
 	}
 
 	if (ImGui::Button("Quit")) {
