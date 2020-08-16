@@ -81,6 +81,18 @@ void imguiConfig() {
 		objects.camera.setCenter(target);
 	}
 
+	if (ImGui::CollapsingHeader("Help")) {
+		ImGui::Text("There are few control options avaliable:");
+		ImGui::TextWrapped("In the dog menu, you can change the dog head position, his tail position.");
+		ImGui::Text("-----------------------------------------------------------------------");
+		ImGui::TextWrapped("In the light menu, you can change the spotlight position and light, the ambient light values and the lamp light.");
+		ImGui::Text("-----------------------------------------------------------------------");
+		ImGui::TextWrapped("In the camera menu, you can change the camera position and on which point the camera is pointed.");
+		ImGui::Text("-----------------------------------------------------------------------");
+		ImGui::TextWrapped("In addition, you can change the view to the dog POV and to a global prespective.");
+		ImGui::Text("-----------------------------------------------------------------------");
+	}
+
 	if (ImGui::Button("Quit")) {
 		exit(0);
 	}
