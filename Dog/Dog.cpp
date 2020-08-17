@@ -28,9 +28,8 @@ void Dog::initialize() {
 	glGetFloatv(GL_MODELVIEW_MATRIX, viewModelMatrix);
 	glLoadIdentity();
 
-	//glRotatef(-90.0f, 0.0f, 1.0f, 0.0f);
-	glTranslatef(4, 4, 4);
-	
+	glTranslatef(7, 4, 7);
+
 	glGetFloatv(GL_MODELVIEW_MATRIX, localAxys);
 	glLoadMatrixf(viewModelMatrix);
 }
@@ -41,13 +40,12 @@ void Dog::draw() {
 	glPushMatrix();
 	
 	GLfloat color[4] = { 0.819f, 0.607f, 0.243f, 1.0f },
-			dog_specular[] = { 0.1f, 0.1f, 0.1f },
-			dog_shininess = 0.1f;
+			spec_dog[] = { 0.1f, 0.1f, 0.1f };
 	
 	glColor4fv(color);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, dog_specular);
-	glMaterialf(GL_FRONT, GL_SHININESS, dog_shininess);
 	glMaterialf(GL_FRONT, GL_EMISSION, 0);
+	glMaterialf(GL_FRONT, GL_SHININESS, 0.1f);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, spec_dog);	
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color);
 	
 	legs.draw();

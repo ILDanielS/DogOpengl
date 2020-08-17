@@ -12,7 +12,7 @@ using namespace std;
 Objects objects;
 
 static ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
-GLfloat globalAmbientVec[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
+GLfloat globalAmbientVec[4] = { 1, 1, 1, 1.0f };
 
 void imguiConfig() {
 	static bool lamp_on = true;
@@ -26,8 +26,8 @@ void imguiConfig() {
 		static GLfloat tailHorizontal = objects.dog.tail.getHorizontalAngle();
 
 		ImGui::Text("Tail Settings");
-		ImGui::SliderFloat("Tail Horizontal Angle", &tailVertical, -30, 30);
-		ImGui::SliderFloat("Tail Vertical Angle", &tailHorizontal, -30, 30);
+		ImGui::SliderFloat("Tail Vertical Angle", &tailVertical, -30, 100);
+		ImGui::SliderFloat("Tail Horizontal Angle", &tailHorizontal, -30, 30);
 
 		objects.dog.tail.setVerticalAngle(tailVertical);
 		objects.dog.tail.setHorizontalAngle(tailHorizontal);
@@ -36,8 +36,8 @@ void imguiConfig() {
 		static GLfloat headHorizontal = objects.dog.head.getHorizontalAngle();
 
 		ImGui::Text("Head Settings");
-		ImGui::SliderFloat("Head Horizontal Angle", &headVertical, -30, 30);
-		ImGui::SliderFloat("Head Vertical Angle", &headHorizontal, -30, 30);
+		ImGui::SliderFloat("Head Vertical Angle", &headVertical, 0, 20);
+		ImGui::SliderFloat("Head Horizontal Angle", &headHorizontal, -10, 10);
 
 		objects.dog.head.setHorizontalAngle(headHorizontal);
 		objects.dog.head.setVerticalAngle(headVertical);
@@ -202,24 +202,24 @@ void guiInteraction()
 //keyboard events handling
 void keyboard(int key, int, int) {
 	switch (key) {
+	case GLUT_KEY_UP:
+		objects.dog.nextMove = []() {
+			glTranslated(0, 0, 0.3f);
+		};
+		break;
+	case GLUT_KEY_DOWN:
+		objects.dog.nextMove = []() {
+			glTranslated(0, 0, -0.3f);
+		};
+		break;
 		case GLUT_KEY_LEFT:  
 			objects.dog.nextMove = []() { 
-				glRotatef(10, 0, 1, 0); 
+				glRotatef(5, 0, 1, 0); 
 			};
 			break;
 		case GLUT_KEY_RIGHT:
 			objects.dog.nextMove = []() { 
-				glRotatef(-10, 0, 1, 0); 
-			};
-			break;
-		case GLUT_KEY_UP:
-			objects.dog.nextMove = []() {
-				glTranslated(0, 0, 1); 
-			};
-			break;
-		case GLUT_KEY_DOWN:
-			objects.dog.nextMove = []() { 
-				glTranslated(0, 0, -1); 
+				glRotatef(-5, 0, 1, 0); 
 			};
 			break;
 	}
