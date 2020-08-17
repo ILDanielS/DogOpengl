@@ -12,8 +12,9 @@ using namespace std;
 Objects objects;
 
 static ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
-GLfloat globalAmbientVec[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
+GLfloat globalAmbientVec[4] = { 1, 1, 1, 1.0f };
 
+// Configuration of ImGui (side bar menu and actions)
 void imguiConfig() {
 	static bool lamp_on = true;
 	static bool spotlight_on = true;
@@ -26,8 +27,8 @@ void imguiConfig() {
 		static GLfloat tailHorizontal = objects.dog.tail.getHorizontalAngle();
 
 		ImGui::Text("Tail Settings");
-		ImGui::SliderFloat("Tail Horizontal Angle", &tailVertical, -30, 30);
-		ImGui::SliderFloat("Tail Vertical Angle", &tailHorizontal, -30, 30);
+		ImGui::SliderFloat("Tail Vertical Angle", &tailVertical, -30, 100);
+		ImGui::SliderFloat("Tail Horizontal Angle", &tailHorizontal, -30, 30);
 
 		objects.dog.tail.setVerticalAngle(tailVertical);
 		objects.dog.tail.setHorizontalAngle(tailHorizontal);
@@ -36,8 +37,8 @@ void imguiConfig() {
 		static GLfloat headHorizontal = objects.dog.head.getHorizontalAngle();
 
 		ImGui::Text("Head Settings");
-		ImGui::SliderFloat("Head Horizontal Angle", &headVertical, -30, 30);
-		ImGui::SliderFloat("Head Vertical Angle", &headHorizontal, -30, 30);
+		ImGui::SliderFloat("Head Vertical Angle", &headVertical, 0, 20);
+		ImGui::SliderFloat("Head Horizontal Angle", &headHorizontal, -10, 10);
 
 		objects.dog.head.setHorizontalAngle(headHorizontal);
 		objects.dog.head.setVerticalAngle(headVertical);
@@ -50,8 +51,7 @@ void imguiConfig() {
 		// lamp controls
 		ImGui::Checkbox("Lamp turn on", &lamp_on);
 		ImGui::ColorEdit3("Lamp light Color", reinterpret_cast<float*>(objects.lamp.color_arr));
-
-		
+				
 		// spotlight controls
 		static std::array<GLfloat, 3> location = objects.spotlight.getPosition();
 
@@ -62,6 +62,7 @@ void imguiConfig() {
 
 		objects.spotlight.setPosition(location);
 	}
+
 	objects.lamp.setState(lamp_on);
 	objects.spotlight.setState(spotlight_on);
 
@@ -83,14 +84,14 @@ void imguiConfig() {
 
 	if (ImGui::CollapsingHeader("Help")) {
 		ImGui::Text("There are few control options avaliable:");
-		ImGui::TextWrapped("In the dog menu, you can change the dog head position, his tail position.");
+		ImGui::TextWrapped("In the dog menu, you can shake the dog's head and wiggle his tail.");
 		ImGui::TextWrapped("The dog can move by using the arrows keys in the keyboard");
 		ImGui::Text("-----------------------------------------------------------------------");
 		ImGui::TextWrapped("In the light menu, you can change the spotlight position and light, the ambient light values and the lamp light.");
 		ImGui::Text("-----------------------------------------------------------------------");
 		ImGui::TextWrapped("In the camera menu, you can change the camera position and on which point the camera is pointed.");
 		ImGui::Text("-----------------------------------------------------------------------");
-		ImGui::TextWrapped("In addition, you can change the view to the dog POV and to a global perspective.");
+		ImGui::TextWrapped("In addition, you can change the point of view to the dog's eyes, or global perspective.");
 		ImGui::Text("-----------------------------------------------------------------------");
 	}
 
@@ -100,38 +101,10 @@ void imguiConfig() {
 	ImGui::End();
 }
 
-
-//keyboard events handling
-void keyboard(int key, int, int) {
-	switch (key) {
-		case GLUT_KEY_LEFT:  
-			objects.dog.nextMove = []() { 
-				glRotatef(10, 0, 1, 0); 
-			};
-			break;
-		case GLUT_KEY_RIGHT:
-			objects.dog.nextMove = []() { 
-				glRotatef(-10, 0, 1, 0); 
-			};
-			break;
-		case GLUT_KEY_UP:
-			objects.dog.nextMove = []() {
-				glTranslated(0, 0, 1); 
-			};
-			break;
-		case GLUT_KEY_DOWN:
-			objects.dog.nextMove = []() { 
-				glTranslated(0, 0, -1); 
-			};
-			break;
-	}
-	
-	glutPostRedisplay();
-}
-
+// Render all objects on screen
 void drawScene() {
 	std::array<GLfloat, 3> pos;
-	
+
 	pos = objects.lamp.getPosition();
 	glPushMatrix();
 	glTranslatef(pos[0], pos[1], pos[2]);
@@ -143,12 +116,19 @@ void drawScene() {
 	glTranslatef(pos[0], pos[1], pos[2]);
 	objects.spotlight.draw();
 	glPopMatrix();
-	
+
 	glPushMatrix();
 	glMultMatrixf(objects.dog.localAxys);
 	objects.dog.draw();
 	glPopMatrix();
-	
+
+	pos = objects.table.getPosition();
+	glPushMatrix();
+	glTranslatef(pos[0], pos[1], pos[2]);
+	objects.table.draw();
+	glPopMatrix();
+
+	objects.floor.draw();
 
 	if (objects.isDogView) {
 		objects.walls.draw({ 0, 1, 2, 3 });
@@ -156,12 +136,37 @@ void drawScene() {
 	else {
 		objects.walls.draw({ 0, 3 });
 	}
-	objects.floor.draw();
-	objects.table.draw();
-
 }
 
-//display handling, rendering all objects
+// Event handler for arrows in keyboard - dog walk
+void keyboard(int key, int, int) {
+	switch (key) {
+	case GLUT_KEY_UP:
+		objects.dog.nextMove = []() {
+			glTranslated(0, 0, 0.3f);
+		};
+		break;
+	case GLUT_KEY_DOWN:
+		objects.dog.nextMove = []() {
+			glTranslated(0, 0, -0.3f);
+		};
+		break;
+		case GLUT_KEY_LEFT:  
+			objects.dog.nextMove = []() { 
+				glRotatef(5, 0, 1, 0); 
+			};
+			break;
+		case GLUT_KEY_RIGHT:
+			objects.dog.nextMove = []() { 
+				glRotatef(-5, 0, 1, 0); 
+			};
+			break;
+	}
+	
+	glutPostRedisplay();
+}
+
+// Display handling, rendering all objects and ImGui
 void display() {
 
 	 //Start the Dear ImGui frame
@@ -183,8 +188,9 @@ void display() {
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 		
-	// Update the dog's transformation matrix
+	// Update dog's location when theres a next move
 	if (objects.dog.nextMove) {
+
 		objects.dog.setIsMoving(true);
 		GLfloat viewModelMatrix[16];
 		glGetFloatv(GL_MODELVIEW_MATRIX, viewModelMatrix);
@@ -196,20 +202,26 @@ void display() {
 	}
 
 	// Change view point to Dog's eyes or camera based on flag
-	if (objects.isDogView) {
+	if (!objects.isDogView) {
+		std::array<GLfloat, 3> camera_pos = objects.camera.getPosition();
+		std::array<GLfloat, 3> camera_center = objects.camera.getCenter();
+		gluLookAt(
+			camera_pos[0], camera_pos[1], camera_pos[2],
+			camera_center[0], camera_center[1], camera_center[2],
+			0, 1, 0);
+	}
+	else {
 		GLfloat viewModelMatrix[16];
+		GLfloat cameraPoseInDogView[16];
+
 		glGetFloatv(GL_MODELVIEW_MATRIX, viewModelMatrix);
 		glLoadMatrixf(objects.dog.localAxys);
-
 		glRotatef(objects.dog.head.getVerticalAngle(), 1, 0, 0);
 		glRotatef(objects.dog.head.getHorizontalAngle(), 0, 1, 0);
 		glTranslated(0, 0.75, 0.9);
-
-		GLfloat cameraPoseInDogView[16];
 		glGetFloatv(GL_MODELVIEW_MATRIX, cameraPoseInDogView);
 		glLoadMatrixf(viewModelMatrix);
 
-		//Hack...
 		GLfloat zAngle = atan2(-cameraPoseInDogView[2], cameraPoseInDogView[0]);
 		GLfloat yAngle = atan2(-cameraPoseInDogView[9], cameraPoseInDogView[5]);
 
@@ -217,14 +229,6 @@ void display() {
 			sin(zAngle) + cameraPoseInDogView[12],
 			-yAngle + cameraPoseInDogView[13],
 			cos(zAngle) + cameraPoseInDogView[14],
-			0, 1, 0);
-	}
-	else {
-		std::array<GLfloat, 3> camera_pos = objects.camera.getPosition();
-		std::array<GLfloat, 3> camera_center = objects.camera.getCenter();
-		gluLookAt(
-			camera_pos[0], camera_pos[1], camera_pos[2],
-			camera_center[0], camera_center[1], camera_center[2],
 			0, 1, 0);
 	}
 
@@ -249,7 +253,6 @@ int main(int argc, char** argv) {
 	glutInitWindowSize(1280, 720);
 	glutCreateWindow("Dog Project");
 	glutDisplayFunc(display);
-
 
 	objects.dog.initialize();
 

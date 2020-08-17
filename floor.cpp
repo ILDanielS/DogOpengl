@@ -1,19 +1,25 @@
 #include "floor.h"
 
-Floor::Floor() : color1{ 0.64f, 0.44f, 0.30f, 0.5f }, color2{ 0.52f, 0.34f, 0.13f, 0.5f }, startx(0), startz(0), endx(10), endz(10) {};
+Floor::Floor() : color1{ 0.64f, 0.44f, 0.30f, 0.5f },
+color2{ 0.52f, 0.34f, 0.13f, 0.5f },
+startx(0),
+startz(0),
+endx(10),
+endz(10) {};
 
 void Floor::draw() {
+	
+	GLfloat specular[] = { 1.0f, 1.0f, 1.0f };
+	
 	glPushMatrix();
 
 	glEnable(GL_BLEND);
 	glBegin(GL_QUADS);	
-	GLfloat specular[] = { 1.0f, 1.0f, 1.0f };
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specular);
 	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 128.0f);
 
 	glNormal3d(0, 1, 0);
 	
-
 	GLfloat* curr_color = color1;
 	bool c1 = true;
 	for (int i = startx; i < endx; i++) {

@@ -57,13 +57,15 @@ void Legs::movement() {
 		{
 			isMovingStraight = !isMovingStraight;
 		}
+
 		if (isMovingStraight)
 		{
-			angle += 6.0;
+			angle += 5.0;
 		}
 		else {
-			angle -= 6.0;
+			angle -= 5.0;
 		}
+
 		this->isMoving = false;
 	}
 }

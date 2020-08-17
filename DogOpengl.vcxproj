@@ -157,7 +157,6 @@
     <ClCompile Include="spotlight.cpp" />
     <ClCompile Include="stb_image.cpp" />
     <ClCompile Include="table.cpp" />
-    <ClCompile Include="utils.cpp" />
     <ClCompile Include="walls.cpp" />
   </ItemGroup>
   <ItemGroup>

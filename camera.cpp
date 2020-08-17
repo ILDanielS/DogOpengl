@@ -6,58 +6,44 @@ Camera::Camera() :position{ 15.0f, 15.f, 15.0f },
 center{ 0.0f, 0.0f, 0.0f } {}
 
 
-void Camera::setPosition(std::array<GLfloat, 3> pos)
-{
+void Camera::setPosition(std::array<GLfloat, 3> pos) {
 	this->position = pos;
 }
 
-void Camera::setCenter(std::array<GLfloat, 3> center)
-{
+void Camera::setCenter(std::array<GLfloat, 3> center) {
 	this->center = center;
 }
 
-std::array<GLfloat, 3> Camera::getPosition()
-{
+std::array<GLfloat, 3> Camera::getPosition() {
 	return std::array<GLfloat, 3>(this->position);
 }
 
-std::array<GLfloat, 3> Camera::getCenter()
-{
+std::array<GLfloat, 3> Camera::getCenter() {
 	std::array<GLfloat, 3> rval;
 	rval[0] = center[0];
 	rval[1] = center[1];
 	rval[2] = center[2];
 
-
 	return std::array<GLfloat, 3>(rval);
 }
 
-void Camera::strafeLeft(float stepSize)
-{
+void Camera::strafeLeft(float stepSize) {
 	this->position[0] -= stepSize;
-	//this->center[0] -= stepSize;
 }
 
-void Camera::strafeRight(float stepSize)
-{
+void Camera::strafeRight(float stepSize) {
 	this->position[0] += stepSize;
-	//this->center[0] += stepSize;
 }
 
-void Camera::moveFoward(float stepSize)
-{
+void Camera::moveFoward(float stepSize) {
 	this->position[2] -= stepSize;
-	//this->center[2] -= stepSize;
 }
 
-void Camera::moveBack(float stepSize)
-{
+void Camera::moveBack(float stepSize) {
 	this->position[2] += stepSize;
-	//this->center[2] += stepSize;
 }
 
-void Camera::rotateLeft(float deg)
-{
+void Camera::rotateLeft(float deg) {
 	double sinv, cosv;
 	sinv = sin(deg * PI / 180);
 	cosv = cos(deg * PI / 180);
@@ -66,8 +52,7 @@ void Camera::rotateLeft(float deg)
 	std::cout << sinv << " " << cosv << std::endl;
 }
 
-void Camera::rotateRight(float deg)
-{
+void Camera::rotateRight(float deg) {
 	double sinv, cosv;
 	sinv = sin(deg * PI / 180);
 	cosv = cos(deg * PI / 180);

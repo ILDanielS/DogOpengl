@@ -4,7 +4,6 @@
 
 class Ball {
 	GLfloat radius;
-	GLuint texture;
 	std::array<GLfloat, 3> position;
 	GLUquadric* quad;
 
