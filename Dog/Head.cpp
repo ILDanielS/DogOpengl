@@ -41,13 +41,6 @@ void Head::draw() {
 	glutSolidSphere(1, 30, 30);
 	glPopMatrix();
 
-	//nose
-	glPushMatrix();
-	glTranslated(0.0f, 0.7f, 1.5f);
-	glScalef(0.24f, 0.15f, 0.45f);
-	gluSphere(gluNewQuadric(), 0.7f, 5, 5);
-	glPopMatrix();
-
 	// ears
 	glPushMatrix();
 	glTranslated(-0.5f, 0.8f, 1);
@@ -60,15 +53,23 @@ void Head::draw() {
 	glScalef(0.15f, 0.2f, 0.15f);
 	glutSolidSphere(1, 30, 30);
 	glPopMatrix();
-
-	//eyes
-	GLfloat spec_eye[] = { 0.4f, 0.4f, 0.4f };
+	
 	GLfloat color[] = { 0,0,0,1 }; // black
 	glColor4fv(color);
+
+	GLfloat spec_eye[] = { 0.4f, 0.4f, 0.4f };
 	glMaterialf(GL_FRONT, GL_SHININESS, 1.0f);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, spec_eye);	
+	glMaterialfv(GL_FRONT, GL_SPECULAR, spec_eye);
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color);
 
+	//nose
+	glPushMatrix();
+	glTranslated(0.0f, 0.7f, 1.6f);
+	glScalef(0.07f, 0.1f, 0.07f);
+	glutSolidSphere(1, 30, 30);
+	glPopMatrix();
+
+	//eyes
 	glPushMatrix();
 	glTranslated(0.15f, 0.9f, 1.5f);
 	glScalef(0.075f, 0.075f, 0.075f);
