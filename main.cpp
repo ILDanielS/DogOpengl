@@ -12,7 +12,7 @@ using namespace std;
 Objects objects;
 
 static ImVec4 clear_color = ImVec4(0.0f, 0.0f, 0.0f, 1.00f);
-GLfloat globalAmbientVec[4] = { 1, 1, 1, 1.0f };
+GLfloat globalAmbientVec[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
 
 // Configuration of ImGui (side bar menu and actions)
 void imguiConfig() {
@@ -54,13 +54,19 @@ void imguiConfig() {
 				
 		// spotlight controls
 		static std::array<GLfloat, 3> location = objects.spotlight.getPosition();
+		static std::array<GLfloat, 3> target = objects.spotlight.getCenter();
 
 		ImGui::Checkbox("Spotlight turn on", &spotlight_on);
 		ImGui::SliderFloat("Position X", &location[0], 0, 10);
 		ImGui::SliderFloat("Position Y", &location[1], 0, 10);
 		ImGui::SliderFloat("Position Z", &location[2], 0, 10);
 
+		ImGui::SliderFloat("Target X", &target[0], 0, 10);
+		ImGui::SliderFloat("Target Y", &target[1], 0, 10);
+		ImGui::SliderFloat("Target Z", &target[2], 0, 10);
+
 		objects.spotlight.setPosition(location);
+		objects.spotlight.setCenter(target);
 	}
 
 	objects.lamp.setState(lamp_on);

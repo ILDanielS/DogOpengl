@@ -2,7 +2,7 @@
 
 Spotlight::Spotlight() : color({ 0.5f, 0.5f, 0.5f }),
 position({ 5.0f, 10.0f, 5.0f }),
-lookat({ 0.0f, -1.0f, 0.0f }) {
+lookat({ 5.0f, 0.0f, 5.0f }) {
 	glEnable(GL_LIGHT0);
 };
 
@@ -12,7 +12,7 @@ void Spotlight::draw() {
 
 	GLfloat color_arr[3] = { color[0], color[1], color[2] };
 	GLfloat pos_arr[3] = { 0,0,0 };
-	GLfloat dir_arr[3] = { lookat[0], lookat[1], lookat[2] };
+	GLfloat dir_arr[3] = { lookat[0]- position[0], lookat[1] - position[1], lookat[2] - position[2]};
 
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, color_arr);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, color_arr);
