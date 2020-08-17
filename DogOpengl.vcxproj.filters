@@ -15,7 +15,6 @@
     <ClCompile Include="spotlight.cpp" />
     <ClCompile Include="stb_image.cpp" />
     <ClCompile Include="table.cpp" />
-    <ClCompile Include="utils.cpp" />
     <ClCompile Include="walls.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_impl_freeglut.cpp" />

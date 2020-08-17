@@ -40,12 +40,12 @@ void Dog::draw() {
 	glPushMatrix();
 	
 	GLfloat color[4] = { 0.819f, 0.607f, 0.243f, 1.0f },
-			spec_dog[] = { 0.1f, 0.1f, 0.1f };
+			spec_dog[] = { 0.1f, 0.3f, 0.2f};
 	
 	glColor4fv(color);
 	glMaterialf(GL_FRONT, GL_EMISSION, 0);
 	glMaterialf(GL_FRONT, GL_SHININESS, 0.1f);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, spec_dog);	
+	glMaterialfv(GL_FRONT, GL_SPECULAR, spec_dog);
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color);
 	
 	legs.draw();

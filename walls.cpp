@@ -32,7 +32,6 @@ void Walls::drawWall() {
 
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
-	//glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 	int height = 10, width = 10;
 	GLfloat ambient[] = { 0.5f, 0.5f, 0.5f },
 		diffuse[] = { 0.9f, 0.9f, 0.9f },
@@ -41,13 +40,12 @@ void Walls::drawWall() {
 
 	glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
 	glMaterialf(GL_FRONT, GL_SHININESS, shininess);
-	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color);
-	
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color);	
 	glBindTexture(GL_TEXTURE_2D, wall_texture);
 	
 	GLuint err = glGetError();
-	glBegin(GL_QUADS);
 
+	glBegin(GL_QUADS);
 
 	glNormal3f(1, 0, 0);
 
@@ -56,6 +54,7 @@ void Walls::drawWall() {
 	glTexCoord2f(1.0, 1.0); glVertex3d(0, 10, 10);
 	glTexCoord2f(1.0, 0.0); glVertex3d(0, 0, 10);
 	glEnd();
+
 	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
 }
@@ -89,6 +88,5 @@ void Walls::draw(std::vector<int> index) {
 		}
 		this->drawWall();
 		glPopMatrix();
-
 	}
 }

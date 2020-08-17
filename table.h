@@ -10,7 +10,6 @@ class Table
 	GLfloat table_gap;
 
 	void drawQuad(GLfloat length, GLfloat height);
-	void drawLeg();
 
 public:
 	Table(std::array<GLfloat, 3> pos = { 2.0f, 0, 2.0f },
@@ -20,8 +19,8 @@ public:
 	);
 	~Table() = default;
 
+	std::array<GLfloat, 3> getPosition();
+	void setPosition(std::array<GLfloat, 3> pos);
 	void draw();
-	
-
 };
 
