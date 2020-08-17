@@ -14,6 +14,9 @@ public:
 
 	std::array<GLfloat, 3> getPosition();
 	void setPosition(std::array<GLfloat, 3> pos);
+	std::array<GLfloat, 3> getCenter();
+	void setCenter(std::array<GLfloat, 3> center);
 	void setState(bool);
+
 };
 

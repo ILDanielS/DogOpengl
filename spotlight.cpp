@@ -12,7 +12,7 @@ void Spotlight::draw() {
 
 	GLfloat color_arr[3] = { color[0], color[1], color[2] };
 	GLfloat pos_arr[3] = { 0,0,0 };
-	GLfloat dir_arr[3] = { 0, -1, 0 };
+	GLfloat dir_arr[3] = { lookat[0]- position[0], lookat[1] - position[1], lookat[2] - position[2]};
 
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, color_arr);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, color_arr);
@@ -37,4 +37,12 @@ std::array<GLfloat, 3> Spotlight::getPosition() {
 
 void Spotlight::setPosition(std::array<GLfloat, 3> pos) {
 	position = pos;
+}
+
+std::array<GLfloat, 3> Spotlight::getCenter() {
+	return lookat;
+}
+
+void Spotlight::setCenter(std::array<GLfloat, 3> center) {
+	lookat = center;
 }

@@ -67,7 +67,7 @@ void Table::draw() {
 	// Teapot
 	GLfloat diffuse_teapot[] = { 0.9f, 0.9f, 0.9f },
 		specular_teapot[] = { 1.0f, 1.0f, 1.0f },
-		color_teapot[] = { 0.75f, 0.75f, 0.75f, 1.0f };
+		color_teapot[] = { 0.6f, 0.6f, 0.6f, 1.0f };
 
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specular_teapot);
 	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 128.0f);
