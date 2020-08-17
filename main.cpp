@@ -69,9 +69,9 @@ void imguiConfig() {
 
 		static std::array<GLfloat, 3>  location = objects.camera.getPosition();
 		static std::array<GLfloat, 3> target = objects.camera.getCenter();
-		ImGui::SliderFloat("Cam Position X", &location[0], -30, 30);
-		ImGui::SliderFloat("Cam Position Y", &location[1], -30, 30);
-		ImGui::SliderFloat("Cam Position Z", &location[2], -30, 30);
+		ImGui::SliderFloat("Cam Position X", &location[0], 0, 15);
+		ImGui::SliderFloat("Cam Position Y", &location[1], 0, 15);
+		ImGui::SliderFloat("Cam Position Z", &location[2], 0, 15);
 
 		ImGui::SliderFloat("Cam Target X", &target[0], 0, 10);
 		ImGui::SliderFloat("Cam Target Y", &target[1], 0, 10);
@@ -81,123 +81,25 @@ void imguiConfig() {
 		objects.camera.setCenter(target);
 	}
 
+	if (ImGui::CollapsingHeader("Help")) {
+		ImGui::Text("There are few control options avaliable:");
+		ImGui::TextWrapped("In the dog menu, you can change the dog head position, his tail position.");
+		ImGui::TextWrapped("The dog can move by using the arrows keys in the keyboard");
+		ImGui::Text("-----------------------------------------------------------------------");
+		ImGui::TextWrapped("In the light menu, you can change the spotlight position and light, the ambient light values and the lamp light.");
+		ImGui::Text("-----------------------------------------------------------------------");
+		ImGui::TextWrapped("In the camera menu, you can change the camera position and on which point the camera is pointed.");
+		ImGui::Text("-----------------------------------------------------------------------");
+		ImGui::TextWrapped("In addition, you can change the view to the dog POV and to a global perspective.");
+		ImGui::Text("-----------------------------------------------------------------------");
+	}
+
 	if (ImGui::Button("Quit")) {
 		exit(0);
 	}
 	ImGui::End();
 }
 
-/*
-//gui interaction handling via imgui
-void guiInteraction()
-{
-	ImGuiWindowFlags window_flags = 0;
-	if (ImGui::Begin("Opengl Dog Scene", false, window_flags))
-	{
-		ImGui::RadioButton("external view", &gContext.isDogView, 0); ImGui::SameLine();
-		ImGui::RadioButton("doggy view", &gContext.isDogView, 1);
-
-		if (ImGui::CollapsingHeader("Dog"))
-		{
-			ImGui::SliderFloat("head horizontal", &gContext.dog.headHorizontalAngle, -30.0f, 30.0f);
-			ImGui::SliderFloat("head vertical", &gContext.dog.headVerticalAngle, -5.0f, 50.0f);
-			ImGui::SliderFloat("tail horizontal", &gContext.dog.tailHorizontalAngle, -25.0f, 25.0f);
-			ImGui::SliderFloat("tail vertical", &gContext.dog.tailVerticalAngle, -14.0f, 50.0f);
-		}
-		if (ImGui::CollapsingHeader("Camera"))
-		{
-			ImGui::SliderFloat("camera source x", &gContext.camera.position[0], -10.0f, 10.0f);
-			ImGui::SliderFloat("camera source y", &gContext.camera.position[1], -10.0f, 10.0f);
-			ImGui::SliderFloat("camera source z", &gContext.camera.position[2], -10.0f, 10.0f);
-			ImGui::SliderFloat("camera target x", &gContext.camera.target[0], -10.0f, 10.0f);
-			ImGui::SliderFloat("camera target y", &gContext.camera.target[1], -10.0f, 10.0f);
-			ImGui::SliderFloat("camera target z", &gContext.camera.target[2], -10.0f, 10.0f);
-		}
-		static bool pointlight = true;
-		static bool spotlight = true;
-		if (ImGui::CollapsingHeader("Lights"))
-		{
-			ImGui::SliderFloat("ambient light adjust", &gContext.globalAmbient, 0.0f, 1.0f);
-			ImGui::Checkbox("enable pointlight", &pointlight);
-
-			ImGui::ColorEdit3("point light color", reinterpret_cast<float*>(&gContext.pointlight.color));
-			ImGui::SliderFloat("pointlight source x", &gContext.pointlight.position[0], -10.0f, 10.0f);
-			ImGui::SliderFloat("pointlight source y", &gContext.pointlight.position[1], -10.0f, 10.0f);
-			ImGui::SliderFloat("pointlight source z", &gContext.pointlight.position[2], -10.0f, 10.0f);
-
-			ImGui::Checkbox("enable spotlight", &spotlight);
-			ImGui::ColorEdit3("spotlight color", reinterpret_cast<float*>(&gContext.spotlight.color));
-			ImGui::SliderFloat("spotlight source x", &gContext.spotlight.position[0], -10.0f, 10.0f);
-			ImGui::SliderFloat("spotlight source y", &gContext.spotlight.position[1], -10.0f, 10.0f);
-			ImGui::SliderFloat("spotlight source z", &gContext.spotlight.position[2], -10.0f, 10.0f);
-			ImGui::SliderFloat("spotlight target x", &gContext.spotlight.target[0], -10.0f, 10.0f);
-			ImGui::SliderFloat("spotlight target y", &gContext.spotlight.target[1], -10.0f, 10.0f);
-			ImGui::SliderFloat("spotlight target z", &gContext.spotlight.target[2], -10.0f, 10.0f);
-			ImGui::SliderFloat("spotlight cutoff", &gContext.spotlight.cutoff, 0.0f, 90.0f);
-			ImGui::SliderFloat("spotlight exponent", &gContext.spotlight.exponent, 0.0f, 90.0f);
-
-			pointlight ? gContext.pointlight.enable() : gContext.pointlight.disable();
-			spotlight ? gContext.spotlight.enable() : gContext.spotlight.disable();
-		}
-		if (ImGui::CollapsingHeader("Walls"))
-		{
-			ImGui::SliderFloat("alpha channel", &gContext.walls.alpha, 0.0f, 1.0f);
-		}
-		if (ImGui::CollapsingHeader("Help"))
-		{
-			ImGui::Text("Viewing modes:");
-			ImGui::TextWrapped((string("There are 2 viewing modes, 'external view' and doggy view', external view is controlled by the 'Camera'") +
-				string(" section, the 'doggy view' is controlled explicitly by the doggy head position and rotation. ")).c_str());
-			ImGui::Text("Keyboard control:");
-			ImGui::TextWrapped((string("The keyboard arrows control the doggy position on the XZ plane - the floor plane.").c_str()));
-			ImGui::Text("Dog section:");
-			ImGui::TextWrapped((string("The controls in the Dog section are controlling the head vertical and horizontal orientaion and the") +
-				string(" tail vertical and horizontal orientation")).c_str());
-			ImGui::Text("Camera section:");
-			ImGui::TextWrapped((string("The controls in the Camera section are controling the camera position in space and the camera target") +
-				string(" point in space.")).c_str());
-			ImGui::Text("Lights section:");
-			ImGui::TextWrapped((string("The controls in the Light section are controling the Light in the scene, 'pointlight' and 'spotlight' are 2") +
-				string(" light sources that can be turned on a off by the checkboxes. 'ambient light adjust' controls the global ambient light value, ") +
-				string(" The spotlight controls the spotlight position in space and the spotlight target in space. the pointlight controls the pointlight position in space")).c_str());
-		}
-		if (ImGui::Button("Quit"))
-		{
-			exit(0);
-		}
-	}
-	ImGui::End();
-}*/
-
-
-
-//void keyboard(int key, int, int) {
-//	// Strafing for testing porposes
-//	float step = 0.1;
-//	switch (key) {
-//	case GLUT_KEY_LEFT:
-//		objects.camera.setPosition({ 5.0f, 5.0f, 30.0f });
-//		objects.camera.setCenter({ 5.0f, 2.5f, 5.0f });
-//		break;
-//	case GLUT_KEY_RIGHT:
-//		objects.camera.setPosition({ 30.0f, 5.0f, 5.0f });
-//		objects.camera.setCenter({ 5.0f, 2.5f, 5.0f });
-//		break;
-//	case GLUT_KEY_UP:
-//		objects.camera.setPosition({ 30.0f,30.0f, 30.0f });
-//		objects.camera.setCenter({ 0,2.5f,0 });
-//		objects.camera.setCenter({ 0,0,0 });
-//		break;
-//
-//	case GLUT_KEY_DOWN:
-//		objects.camera.setPosition({ 30.0f, 5.0f, 30.0f });
-//		objects.camera.setCenter({ 0,2.5f,0 });
-//		break;
-//	}
-//	objects.camera.print();
-//	glutPostRedisplay();
-//	
-//}
 
 //keyboard events handling
 void keyboard(int key, int, int) {
@@ -249,7 +151,7 @@ void drawScene() {
 	
 
 	if (objects.isDogView) {
-		objects.walls.draw({ 0,1,2, 3 });
+		objects.walls.draw({ 0, 1, 2, 3 });
 	}
 	else {
 		objects.walls.draw({ 0, 3 });
@@ -257,55 +159,6 @@ void drawScene() {
 	objects.floor.draw();
 	objects.table.draw();
 
-
-	/*
-	glPushMatrix();
-	glTranslatef(gContext.pointlight.position[0], gContext.pointlight.position[1], gContext.pointlight.position[2]);
-	gContext.pointlight.addLight();
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslatef(gContext.spotlight.position[0], gContext.spotlight.position[1], gContext.spotlight.position[2]);
-	gContext.spotlight.addlight();
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslatef(gContext.spotlight.position[0], gContext.spotlight.position[1], gContext.spotlight.position[2]);
-	gContext.spotlight.draw();
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslatef(gContext.pointlight.position[0], gContext.pointlight.position[1], gContext.pointlight.position[2]);
-	gContext.pointlight.draw();
-	glPopMatrix();
-
-	gContext.floor.draw();
-
-	glPushMatrix();
-	glMultMatrixf(gContext.dog.local);
-	gContext.dog.draw();
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslated(-3, 1.05, -3);
-	gContext.table.draw();
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslated(-2.2, 1.35, -3);
-	gContext.teapot.draw();
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslatef(-3.0f, 0, 3);
-	glRotatef(90, 0, 1, 0);
-	gContext.snowman.draw();
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslated(1.0f, 1.5f, -4.99f);
-	gContext.art.draw();
-	glPopMatrix();*/
 }
 
 //display handling, rendering all objects
@@ -326,7 +179,7 @@ void display() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(30.0, (16/9), 1.0, 150.0);
+	gluPerspective(60.0, 1.0, 1.0, 150.0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 		
