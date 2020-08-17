@@ -2,7 +2,7 @@
 #include <iostream>
 #define PI 3.14159265
 
-Camera::Camera() :position{ 30.0f, 30.f, 30.0f },
+Camera::Camera() :position{ 15.0f, 15.f, 15.0f },
 center{ 0.0f, 0.0f, 0.0f } {}
 
 
