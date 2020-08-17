@@ -138,7 +138,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ball.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="Dog\Body.cpp" />
     <ClCompile Include="Dog\Dog.cpp" />
@@ -160,7 +159,6 @@
     <ClCompile Include="walls.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ball.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="Dog\Body.h" />
     <ClInclude Include="Dog\Dog.h" />

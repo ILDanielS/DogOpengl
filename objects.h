@@ -2,7 +2,6 @@
 #include "walls.h"
 #include "camera.h"
 #include "floor.h"
-#include "ball.h"
 #include "table.h"
 #include "spotlight.h"
 #include "lamp.h"
@@ -14,7 +13,6 @@ public:
 	Walls walls;
 	Floor floor;
 	Camera camera;
-	Ball ball;
 	Dog dog;
 	Table table;
 	Spotlight spotlight;
