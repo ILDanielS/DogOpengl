@@ -28,7 +28,7 @@ void Dog::initialize() {
 	glGetFloatv(GL_MODELVIEW_MATRIX, viewModelMatrix);
 	glLoadIdentity();
 
-	glTranslatef(7, 4, 7);
+	glTranslatef(7, 1, 7);
 
 	glGetFloatv(GL_MODELVIEW_MATRIX, localAxys);
 	glLoadMatrixf(viewModelMatrix);
